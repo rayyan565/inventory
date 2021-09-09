@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"> 
+
+<meta> 
+  <meta charset="UTF-8">
+  <meta name= "viewport" content="width=device-width, intial-scale=1.0">
+  <!-- <h2 style = "color:whitesmoke" t = "text-align:center" >Inventory Accuracy</h2> -->
+</head>
+
+<body style="background-color:white;">
+<div class="cont">
+  
+  <!-- <button class="btn-1">Hover Me!</button> -->
+</div>
+
+  
+  <input id="seperate" type="button" name="seperate" value="Seperate" />
+  <input id="collapse" type="button" name="collapse" value="Collapse"/>
+  <input id="frozen" type="button" name="frozen" value="Frozen"/>
+  <input id="Out-of-Stock" type="button" name="Out-of-Stock" value="Out-of-Stock"/>
+  <input id="orderSmape" type="button" name="orderSmape" value="Order Error"/>
+  <input id="smapeHeatmap" type="button" name="smapeHeatmap" value="Error Heatmap" />
+  <input id="Data" type="button" name="Data" value="Data" />
+  <input id = "file" type="file" onchange="loadFile()" />
+  <input id="resetButton" type="button" name="resetButton" value="Reset" style="float: right;"/>
+  
+  
+    
+  <div class="chart-example" id="chart"><svg></svg></div>
+
+  
+</body>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.6.0/d3.min.js"></script>
+<!-- <script src="fileReader.js"></script> -->
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+<script src="calculations.js"></script>
+<script src="bubbleChart.js"></script>
+<script src="fill.js"></script>
+
+</html>
