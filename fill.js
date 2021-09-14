@@ -42,7 +42,9 @@ document.getElementById('resetButton').onclick = function() {
   }
 }
 
-var reader = new FileReader();  
+var reader = new FileReader();
+
+
     
     function loadFile() {      
       var file = document.querySelector('input[type=file]').files[0];      
