@@ -6,7 +6,6 @@ $connectionInfo = array( "Database"=>"RFID_Inventory", "UID"=>"RFID_Inventoryuse
 $conn = sqlsrv_connect( $serverName, $connectionInfo);
 
 // get vendors
-
 $getVendorsquery = "
   SELECT DISTINCT(Vendor_Name)
   FROM wal_main_apr6tojul02_filtered
@@ -18,7 +17,6 @@ while ($row = sqlsrv_fetch_array($vendors, SQLSRV_FETCH_ASSOC)) {
 }
 
 // line chart 
-
 $linesQuery = "
     SELECT Date as date, 
     (
@@ -64,7 +62,7 @@ $table = array();
 
 $table['cols'] = array(
   array(
-  'label' => 'Date Time', 
+  'label' => 'Date', 
   'type' => 'date'
   ),
   array(
@@ -109,7 +107,6 @@ while($row = sqlsrv_fetch_array($queryRes, SQLSRV_FETCH_ASSOC)){
 
 ?>
 
-
 <html lang="en"> 
 
 <head> 
@@ -118,43 +115,82 @@ while($row = sqlsrv_fetch_array($queryRes, SQLSRV_FETCH_ASSOC)){
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script type="text/javascript">
 
-  google.charts.load('current', {'packages':['corechart', 'line']});
-  google.charts.setOnLoadCallback(drawChart);
-  function drawChart(){
-  var data = new google.visualization.DataTable(<?php echo $jsonTable; ?>);
-  var options = {
-    title:'',
-    legend:{position:'top'},
-    hAxis: {
-      title: '',
-      textStyle: {
-        fontSize: 10,
-        bold: false
-      },
-      titleTextStyle:{
-        italic: false
-      }
-    },
-    vAxis: {
-      title: '',
-      textStyle: {
-        fontSize: 10,
-        bold: false
-      },
-      titleTextStyle:{
-        italic: false
-      }
-    },
-    colors: ['#00ff00', '#ff0000', '#0000ff'],
-    fontSize: 10,
-    textStyle: "Helvetica"
-  };
-  var chart = new google.visualization.LineChart(document.getElementById('line_chart'));
+  google.charts.load('current', {'packages':['corechart', 'controls']});
+  google.charts.setOnLoadCallback(drawDashboard);
 
-  chart.draw(data, options);
+  function drawDashboard(){
+    var data = new google.visualization.DataTable(<?php echo $jsonTable; ?>);
+
+    var dashboard = new google.visualization.Dashboard(document.getElementById('dashboard_div'));
+
+    var dateRangeSlider = new google.visualization.ControlWrapper({
+      'controlType': 'DateRangeFilter',
+      'containerId': 'filter_div',
+      'options': {
+        title:'',
+        filterColumnIndex: 0,
+        ui: {
+          chartOptions: {
+            chartArea: {width:'100%', height: 'auto'},
+            
+          }
+        },
+        hAxis: {
+          baselineColor: 'none'
+        },
+        vAxis: {
+          textStyle: {
+            fontSize: 10,
+            bold: false
+          },
+          titleTextStyle:{
+            italic: false
+          }
+        }   
+      }
+    });
+    
+    var chart = new 
+    google.visualization.ChartWrapper({
+      'chartType': 'ColumnChart',    // stacked bar chart
+      // 'chartType': 'LineChart',   // Line Chart
+      'containerId': 'line_div',
+      'options': {
+        title:'',
+        legend:{position:'top'},
+        isStacked: true,             // stacked bar chart
+        hAxis: {
+          title: '',
+          textStyle: {
+            fontSize: 10,
+            bold: false
+          },
+          titleTextStyle:{
+            italic: false
+          }
+        },
+        vAxis: {
+          title: '',
+          textStyle: {
+            fontSize: 10,
+            bold: false
+          },
+          titleTextStyle:{
+            italic: false
+          }
+        },
+        colors: ['#00FF7F', '#FF3B28', '#00A7FA'],
+        fontSize: 10,
+        textStyle: "Helvetica"
+      }
+    });
+
+    dashboard.bind(dateRangeSlider, chart);
+    dashboard.draw(data);
+
   }
   
-  google.charts.setOnLoadCallback(drawChart);
+  google.charts.setOnLoadCallback(drawDashboard);
 
 </script>
 
@@ -163,7 +199,7 @@ while($row = sqlsrv_fetch_array($queryRes, SQLSRV_FETCH_ASSOC)){
 
 </head>
 
-<body style="background-color:white;">
+<body style="background-color: white;">
 
   <!-- Header and buttons -->
   <div class="container">
@@ -172,6 +208,7 @@ while($row = sqlsrv_fetch_array($queryRes, SQLSRV_FETCH_ASSOC)){
     <div class="row">
       <div class="col-sm-2">
         <button 
+          
           style="
             font-family: Helvetica;
             font-size: larger;
@@ -210,23 +247,24 @@ while($row = sqlsrv_fetch_array($queryRes, SQLSRV_FETCH_ASSOC)){
 
     <br/>
 
-    <div class="row" id="disableClick">
-    <div class="col-sm-4">
-      <h5> Date slider here </h5>
-    </div>
-    <div class="col-sm-8" style="float:right">
-      <div id="line_chart" style="width: 100%; height: 75%"></div>
-    </div>
+    <!-- Dashboard -->
+    <div class="row" id="dashboard_div">
+      <div class="col-sm-4" style="float:left" >
+        <div id="filter_div" style="margin-top: 10rem;"></div>
+      </div>
+
+      <div class="col-sm-8" style="float:right">
+        <div id="line_div" style="width: 100%; height: 75%"></div>
+      </div>
     </div>
 
-    <br/>
     <br/>
 
     <!-- first row of buttons (action buttons) -->
-    <div class="row">
+    <div class="row ">
       <div class="col-sm-2" >
         <button
-          class="btn btn-default1 btn-sm btn-block responsive-width"
+          class="btn btn-style btn-sm btn-block responsive-width"
           id="seperate"
           name="separate"
         >
@@ -236,7 +274,7 @@ while($row = sqlsrv_fetch_array($queryRes, SQLSRV_FETCH_ASSOC)){
     
       <div class="col-sm-2" >
         <button
-          class="btn btn-default1 btn-sm btn-block responsive-width"
+          class="btn btn-style btn-sm btn-block responsive-width"
           id="frozen"
           name="frozen"
         >
@@ -246,7 +284,7 @@ while($row = sqlsrv_fetch_array($queryRes, SQLSRV_FETCH_ASSOC)){
 
       <div class="col-sm-2" >
         <button
-          class="btn btn-default1 btn-sm btn-block responsive-width"
+          class="btn btn-style btn-sm btn-block responsive-width"
           id="Out-of-Stock"
           name="Out-of-Stock"
         >
@@ -256,7 +294,7 @@ while($row = sqlsrv_fetch_array($queryRes, SQLSRV_FETCH_ASSOC)){
     
       <div class="col-sm-2" >
         <button
-          class="btn btn-default1 btn-sm btn-block responsive-width"
+          class="btn btn-style btn-sm btn-block responsive-width"
           id="orderSmape"
           name="orderSmape"
         >
@@ -266,7 +304,7 @@ while($row = sqlsrv_fetch_array($queryRes, SQLSRV_FETCH_ASSOC)){
     
       <div class="col-sm-2" >
         <button
-          class="btn btn-default1 btn-sm btn-block responsive-width"
+          class="btn btn-style btn-sm btn-block responsive-width"
           id="smapeHeatmap"
           name="smapeHeatmap"
         >
@@ -276,7 +314,7 @@ while($row = sqlsrv_fetch_array($queryRes, SQLSRV_FETCH_ASSOC)){
 
       <div class="col-sm-2" >
         <button
-          class="btn btn-default1 btn-sm btn-block responsive-width"
+          class="btn btn-style btn-sm btn-block responsive-width"
           id="collapse"
           name="collapse"
         >
@@ -318,7 +356,7 @@ while($row = sqlsrv_fetch_array($queryRes, SQLSRV_FETCH_ASSOC)){
 
           <div class="col-sm-4" >
             <input
-              class="btn btn-default1 btn-sm btn-block responsive-width"
+              class="btn btn-style btn-sm btn-block responsive-width"
               name="datePicker"
               id="datepicker"
               placeholder="Select Date"
@@ -328,18 +366,18 @@ while($row = sqlsrv_fetch_array($queryRes, SQLSRV_FETCH_ASSOC)){
           <div class="col-sm-2">
             <input 
               type="submit" 
-              class="btn btn-default1 btn-sm btn-block responsive-width" 
+              class="btn btn-style btn-sm btn-block responsive-width" 
               name="submit" 
               value="Submit"
-              style="background-color: #682626" />
+              style="background-color: #852323" />
           </div>
 
           <div class="col-sm-2" >
             <button
-              class="btn btn-default1 btn-sm btn-block responsive-width"
+              class="btn btn-style btn-sm btn-block responsive-width"
               id="collapse"
               name="collapse"
-              style="background-color: #682626"
+              style="background-color: #852323"
             >
               Reset
             </button>
@@ -376,7 +414,7 @@ while($row = sqlsrv_fetch_array($queryRes, SQLSRV_FETCH_ASSOC)){
       Data
     </button>
 
-    <svg  id="chart"></svg>
+    <svg></svg>
 
     <!-- <div id="chart-container"></div> -->
 
@@ -398,13 +436,14 @@ while($row = sqlsrv_fetch_array($queryRes, SQLSRV_FETCH_ASSOC)){
       width: 11rem;
     }
 
-    .btn-default1 {
+    .btn-style {
       font-family: Helvetica;
       text-align: center;
-      background-color: #145491;
+      background-color: #1162ad;
       border-color: white;
       color: white;
       border-radius: 1rem;
+      
     }
 
     .uploadFileButton {
@@ -517,13 +556,12 @@ while($row = sqlsrv_fetch_array($queryRes, SQLSRV_FETCH_ASSOC)){
       enableFiltering: true,
       enableCaseInsensitiveFiltering: true,
       buttonWidth: '100%',
-      buttonClass: 'btn btn-default1 btn-sm btn-block responsive-width'
+      buttonClass: 'btn btn-style btn-sm btn-block responsive-width'
     });
 
     $('#framework_form').on('submit', function(event){
-      // d3.selectAll("svg > *").remove()
+      d3.select("#chart").selectAll("svg > *").remove();
       event.preventDefault();
-      d3.selectAll("svg > chart").remove()
       form_data = $(this).serialize();
       selectedDate = $("#datepicker").val();
       test = 'test data';
