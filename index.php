@@ -248,14 +248,16 @@ while($row = sqlsrv_fetch_array($queryRes, SQLSRV_FETCH_ASSOC)){
     <br/>
 
     <!-- Dashboard -->
-    <div class="row" id="dashboard_div">
-      <div class="col-sm-4" style="float:left" >
-        <div id="filter_div" style="margin-top: 10rem;"></div>
-      </div>
+    <div id="dashboard_div">
+      
 
-      <div class="col-sm-8" style="float:right">
+      <!-- <div class="col-sm-8" style="float:right"> -->
         <div id="line_div" style="width: 100%; height: 75%"></div>
-      </div>
+      <!-- </div> -->
+
+      <!-- <div class="col-sm-4" style="float:left" > -->
+      <div id="filter_div" style="width: 100%; height: 75%;"></div>
+      <!-- </div> -->
     </div>
 
     <br/>
