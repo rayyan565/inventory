@@ -153,7 +153,7 @@ while($row = sqlsrv_fetch_array($queryRes, SQLSRV_FETCH_ASSOC)){
     var chart = new 
     google.visualization.ChartWrapper({
       'chartType': 'ColumnChart',    // stacked bar chart
-      // 'chartType': 'LineChart',   // Line Chart
+      // 'chartType': 'LineChart',   // Line Chart here
       'containerId': 'line_div',
       'options': {
         title:'',
