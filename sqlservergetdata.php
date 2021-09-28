@@ -39,13 +39,21 @@ $conn = sqlsrv_connect( $serverName, $connectionInfo);
         // ";
 
         $vendorsQuery = sqlsrv_query($conn, $query);
-        if($vendorsQuery){
-            $dataVen = array();
-            while ($row = sqlsrv_fetch_array($vendorsQuery, SQLSRV_FETCH_ASSOC)) {
-                $dataVen[] = $row;
-            }
-            echo json_encode($dataVen);
+        if(str_starts_with($selectedDate, 'Select')){
+            echo ('Select Date to View Bubble Viz');
         }
+        else{
+            if($vendorsQuery){
+                $dataVen = array();
+                while ($row = sqlsrv_fetch_array($vendorsQuery, SQLSRV_FETCH_ASSOC)) {
+                    $dataVen[] = $row;
+                }
+                echo json_encode($dataVen);
+            }
+        }
+            
+       
+        
     }
     else {
         echo 'Please select both Vendor(s) and a Date';

@@ -120,8 +120,8 @@ while ($row = sqlsrv_fetch_array($vendors, SQLSRV_FETCH_ASSOC)) {
               class="form-control"
               name="framework[]"
               id="framework" 
-              multiple 
-              >
+              multiple
+            >
               <?php
                 foreach($dataVendors as $row)
                 {
@@ -418,9 +418,12 @@ while ($row = sqlsrv_fetch_array($vendors, SQLSRV_FETCH_ASSOC)) {
       nonSelectedText: 'Select Vendors',
       enableFiltering: true,
       enableCaseInsensitiveFiltering: true,
+      includeSelectAllOption: true,
       buttonWidth: '100%',
       buttonClass: 'btn btn-style btn-sm btn-block responsive-width'
-    });
+    })
+    .multiselect('selectAll', true)
+    .multiselect('updateButtonText');
 
     $('#framework_form').on('submit', function(event){
       d3.select("#chart").selectAll("svg > *").remove();
@@ -435,12 +438,18 @@ while ($row = sqlsrv_fetch_array($vendors, SQLSRV_FETCH_ASSOC)) {
         data: form_data,
         success:function(data){
 
-          data = JSON.parse(data);
+          if (data.startsWith("Select Date")){
+            alert(data);
+          }
+          else if(data.startsWith("Please select")){
+            alert(data);
+          }
+          else{
+            data = JSON.parse(data);
 
-          var chart = bubbleChart().width(window.innerWidth).height(window.innerHeight);
-          d3.select('body').select('#chart').datum(data).call(chart);
-
-          // alert(data);
+            var chart = bubbleChart().width(window.innerWidth).height(window.innerHeight);
+            d3.select('body').select('#chart').datum(data).call(chart);
+          }
 
         }
       });
