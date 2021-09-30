@@ -37,7 +37,7 @@ while ($row = sqlsrv_fetch_array($vendors, SQLSRV_FETCH_ASSOC)) {
   <div class="container">
 
     <!-- header row -->
-    <div class="row">
+    <!-- <div class="row">
       <div class="col-sm-2">
         <button 
           
@@ -75,7 +75,7 @@ while ($row = sqlsrv_fetch_array($vendors, SQLSRV_FETCH_ASSOC)) {
         </a>
       </div>
 
-    </div>
+    </div> -->
 
     <br/>
 

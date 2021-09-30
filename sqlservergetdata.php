@@ -56,7 +56,7 @@ $conn = sqlsrv_connect( $serverName, $connectionInfo);
         
     }
     else {
-        echo 'Please select both Vendor(s) and a Date';
+        echo 'Please select "Vendor(s)" and/or "Date" to view chart(s)';
     }
 
     // sqlsrv_close($conn);
