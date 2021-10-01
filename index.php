@@ -165,6 +165,7 @@ while ($row = sqlsrv_fetch_array($vendors, SQLSRV_FETCH_ASSOC)) {
     </div>
 
     <br/>
+    <br/>
 
   </div>
 
@@ -173,16 +174,16 @@ while ($row = sqlsrv_fetch_array($vendors, SQLSRV_FETCH_ASSOC)) {
   
     <div class="row ">
 
-      <div class="col-sm-1">
+      <div class="col-sm-1" style="margin-top: 1rem;">
         <label class="switch" style="float:left;">
           <input type="checkbox" onchange="toggleFunction()">
           <span class="slider round"></span>
         </label>
       </div>
       
-      <div class="col-sm-1" >
+      <div class="col-sm-1" style="margin-top: 1rem;" >
         <button
-          class="responvie-width"
+          class="btn btn-style btn-sm btn-block responsive-width btn-width"
           id="seperate"
           name="separate"
           
@@ -191,10 +192,10 @@ while ($row = sqlsrv_fetch_array($vendors, SQLSRV_FETCH_ASSOC)) {
         </button>
       </div>
     
-      <div class="col-sm-1" >
+      <div class="col-sm-1" style="margin-top: 1rem;" >
         <button
           
-          class="responvie-width"
+          class="btn btn-style btn-sm btn-block responsive-width btn-width"
           id="frozen"
           name="frozen"
           
@@ -203,10 +204,10 @@ while ($row = sqlsrv_fetch_array($vendors, SQLSRV_FETCH_ASSOC)) {
         </button>
       </div>
 
-      <div class="col-sm-1" >
+      <div class="col-sm-1" style="margin-top: 1rem;" >
         <button
           
-          class="responvie-width"
+          class="btn btn-style btn-sm btn-block responsive-width btn-width"
           id="Out-of-Stock"
           name="Out-of-Stock"
           
@@ -215,10 +216,10 @@ while ($row = sqlsrv_fetch_array($vendors, SQLSRV_FETCH_ASSOC)) {
         </button>
       </div>
     
-      <div class="col-sm-1" >
+      <div class="col-sm-1" style="margin-top: 1rem;" >
         <button
           
-          class="responvie-width"
+          class="btn btn-style btn-sm btn-block responsive-width btn-width"
           id="orderSmape"
           name="orderSmape"
           
@@ -227,10 +228,10 @@ while ($row = sqlsrv_fetch_array($vendors, SQLSRV_FETCH_ASSOC)) {
         </button>
       </div>
     
-      <div class="col-sm-1" >
+      <div class="col-sm-1" style="margin-top: 1rem;" >
         <button
           
-          class="responvie-width"
+          class="btn btn-style btn-sm btn-block responsive-width btn-width"
           id="smapeHeatmap"
           name="smapeHeatmap"
           
@@ -239,10 +240,10 @@ while ($row = sqlsrv_fetch_array($vendors, SQLSRV_FETCH_ASSOC)) {
         </button>
       </div>
 
-      <div class="col-sm-1" >
+      <div class="col-sm-1" style="margin-top: 1rem;" >
         <button
           
-          class="responvie-width"
+          class="btn btn-style btn-sm btn-block responsive-width btn-width"
           id="collapse"
           name="collapse"
           
@@ -251,11 +252,11 @@ while ($row = sqlsrv_fetch_array($vendors, SQLSRV_FETCH_ASSOC)) {
         </button>
       </div>
 
-      <div class="col-sm-5" >
+      <div class="col-sm-5" style="margin-top: 1rem;" >
         <div style="float: right;">
           <button
 
-          class="responvie-width"
+          class="btn btn-style btn-sm btn-block responsive-width btn-width"
           id="Data"
           name="Data"
         >
@@ -267,7 +268,7 @@ while ($row = sqlsrv_fetch_array($vendors, SQLSRV_FETCH_ASSOC)) {
 
       <div class="uploadFileButton">
         <input 
-          class="uploadFile btn btn-primary" 
+          class="uploadFile btn " 
           id = "file" 
           type="hidden"
         />
@@ -293,8 +294,8 @@ while ($row = sqlsrv_fetch_array($vendors, SQLSRV_FETCH_ASSOC)) {
       border-radius: 1rem;
     }
 
-    .btn-primary {
-      width: 11rem;
+    .btn-width {
+      width: 10rem !important;
     }
 
     .btn-style {
@@ -303,7 +304,7 @@ while ($row = sqlsrv_fetch_array($vendors, SQLSRV_FETCH_ASSOC)) {
       background-color: #8a8a8a;
       border-color: white;
       color: white;
-      border-radius: 1rem;
+      border-radius: 2rem !important;
       
     }
 
