@@ -31,7 +31,7 @@ while ($row = sqlsrv_fetch_array($vendors, SQLSRV_FETCH_ASSOC)) {
 
 </head>
 
-<body style="background-color: white;">
+<body >
 
   <!-- Header and buttons -->
   <div class="container">
@@ -169,7 +169,7 @@ while ($row = sqlsrv_fetch_array($vendors, SQLSRV_FETCH_ASSOC)) {
   </div>
 
   <!-- Chart canvas -->
-  <div class="chartClass" id="chart">
+  <div class="chartClass" id="chart" >
   
     <div class="row ">
 
@@ -182,11 +182,10 @@ while ($row = sqlsrv_fetch_array($vendors, SQLSRV_FETCH_ASSOC)) {
       
       <div class="col-sm-1" >
         <button
-          
           class="responvie-width"
           id="seperate"
           name="separate"
-          style="width: 11rem;"
+          
         >
           Separate
         </button>
@@ -198,7 +197,7 @@ while ($row = sqlsrv_fetch_array($vendors, SQLSRV_FETCH_ASSOC)) {
           class="responvie-width"
           id="frozen"
           name="frozen"
-          style="width: 11rem;"
+          
         >
           Frozen
         </button>
@@ -210,7 +209,7 @@ while ($row = sqlsrv_fetch_array($vendors, SQLSRV_FETCH_ASSOC)) {
           class="responvie-width"
           id="Out-of-Stock"
           name="Out-of-Stock"
-          style="width: 11rem;"
+          
         >
           Out-of-Stock
         </button>
@@ -222,7 +221,7 @@ while ($row = sqlsrv_fetch_array($vendors, SQLSRV_FETCH_ASSOC)) {
           class="responvie-width"
           id="orderSmape"
           name="orderSmape"
-          style="width: 11rem;"
+          
         >
           Order Error
         </button>
@@ -234,7 +233,7 @@ while ($row = sqlsrv_fetch_array($vendors, SQLSRV_FETCH_ASSOC)) {
           class="responvie-width"
           id="smapeHeatmap"
           name="smapeHeatmap"
-          style="width: 11rem;"
+          
         >
           Error Heatmap
         </button>
@@ -246,7 +245,7 @@ while ($row = sqlsrv_fetch_array($vendors, SQLSRV_FETCH_ASSOC)) {
           class="responvie-width"
           id="collapse"
           name="collapse"
-          style="width: 11rem;"
+          
         >
           Collapse
         </button>
@@ -259,9 +258,7 @@ while ($row = sqlsrv_fetch_array($vendors, SQLSRV_FETCH_ASSOC)) {
           class="responvie-width"
           id="Data"
           name="Data"
-          style="
-            width: 11rem;
-            ">
+        >
           Data
         </button>
         </div>
@@ -282,6 +279,7 @@ while ($row = sqlsrv_fetch_array($vendors, SQLSRV_FETCH_ASSOC)) {
     <svg></svg>
 
   </div>
+
 
   <!-- styling -->
   <style type="text/css">
@@ -309,6 +307,10 @@ while ($row = sqlsrv_fetch_array($vendors, SQLSRV_FETCH_ASSOC)) {
       
     }
 
+    .responvie-width {
+      width: 11rem;
+    }
+
     .uploadFileButton {
       overflow: hidden;
     }
@@ -317,9 +319,9 @@ while ($row = sqlsrv_fetch_array($vendors, SQLSRV_FETCH_ASSOC)) {
       font-size: 12px;
     }
 
-    .chartClass{
+    .chartClass {
       background-color: #111111;
-
+      height: 100vmax;
     }
 
     .toggleBackground {
@@ -385,6 +387,57 @@ while ($row = sqlsrv_fetch_array($vendors, SQLSRV_FETCH_ASSOC)) {
     .slider.round:before {
       border-radius: 50%;
     }
+
+    .multiselect-container > .active > a, 
+    .multiselect-container > .active > a:hover {
+      background-color: #8a8a8a !important;
+    }
+    .multiselect-container > .active > a:focus {
+      background-color: #8a8a8a !important;
+    }
+
+    .ui-datepicker {
+      width: 25% !important;
+    }
+
+    .ui-datepicker-header {
+    background-color: #8a8a8a !important;
+    }
+
+    .ui-datepicker-title {
+    color: #ffffff;
+    font-size: small;
+    font-family: Helvetica !important;
+    }
+
+    .ui-datepicker td {
+    padding: 0;
+    font-size: small;
+    background-color: #8b8b8b32 !important;
+    }
+
+    .ui-datepicker-calendar {
+      background: #ffffff;
+    }
+
+    .ui-widget-content .ui-state-default {
+      font-family: Helvetica !important;
+      border: 0px;
+      text-align: center;
+      background: #ffffff !important;
+      font-weight: normal;
+      color: #444444 !important;
+    }
+
+    .ui-widget-content .ui-state-default:hover {
+      font-family: Helvetica !important;
+      border: 0px;
+      text-align: center;
+      background: #8a8a8a !important;
+      font-weight: bolder;
+      color: #ffffff !important;
+    }
+
 
   </style>
 
