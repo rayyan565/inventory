@@ -17,7 +17,7 @@ $conn = sqlsrv_connect( $serverName, $connectionInfo);
         $frameworkList = "'" . str_replace(",","','", $framework) . "'";
 
         $query = "
-        SELECT SKU As SKU1, Cycle_Count_Restored As RFID, Hist_On_Hand_Qty As OH 
+        SELECT SKU As SKU, Cycle_Count_Restored As RFID, Hist_On_Hand_Qty As OH 
         FROM wal_main_apr6tojul02_filtered 
         WHERE Vendor_Name IN ($frameworkList) 
         AND Date LIKE '$selectedDate'
@@ -26,7 +26,7 @@ $conn = sqlsrv_connect( $serverName, $connectionInfo);
 
 
         // $query = "
-        // SELECT SKU As SKU1, Cycle_Count_Restored As RFID, Hist_On_Hand_Qty As OH 
+        // SELECT SKU As SKU, Cycle_Count_Restored As RFID, Hist_On_Hand_Qty As OH 
         // FROM wal_main_apr6tojul02_filtered 
         // WHERE Vendor_Name IN ($frameworkList) 
         // AND Hist_On_Hand_Qty - Cycle_Count_Restored < 0

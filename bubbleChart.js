@@ -56,7 +56,7 @@ function bubbleChart() {
             .style("stroke-width",(d) => calculateStroke(d.OH, d.RFID))
             .attr('transform', 'translate(' + [width / 2, height / 2] + ')')
             .on("mouseover", function(d) {
-                tooltip.html("RFID: " + d.RFID + "<br>" + "OH: "+ d.OH + "<br>" + "SKU: "+ d.SKU1);
+                tooltip.html("RFID: " + d.RFID + "<br>" + "OH: "+ d.OH + "<br>" + "SKU: "+ d.SKU);
                 return tooltip.style("visibility", "visible");
             })
             .on("mousemove", function() {

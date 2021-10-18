@@ -1,33 +1,15 @@
 <!DOCTYPE html>
 
-<?php
-$serverName = "oitss5\mssql05,1433"; //serverName\instanceName
-$connectionInfo = array( "Database"=>"RFID_Inventory", "UID"=>"RFID_Inventoryuser", "PWD"=>"pO49nY1xdM");
-$conn = sqlsrv_connect( $serverName, $connectionInfo);
-
-// get vendors
-$getVendorsquery = "
-  SELECT DISTINCT(Vendor_Name)
-  FROM wal_main_apr6tojul02_filtered
-  ";
-$vendors = sqlsrv_query($conn, $getVendorsquery);
-$dataVendors = array();
-while ($row = sqlsrv_fetch_array($vendors, SQLSRV_FETCH_ASSOC)) {
-  array_push($dataVendors, $row['Vendor_Name']);
-}
-
-?>
-
 <html lang="en"> 
 
 <head> 
 
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
 
-<!-- <meta charset="UTF-8">
-<meta name= "viewport" content="width=device-width"> -->
+  <!-- <meta charset="UTF-8">
+  <meta name= "viewport" content="width=device-width"> -->
 
 </head>
 
@@ -35,7 +17,7 @@ while ($row = sqlsrv_fetch_array($vendors, SQLSRV_FETCH_ASSOC)) {
 
   <!-- Header and buttons -->
   <div class="container">
-
+   
     <!-- header row -->
     <!-- <div class="row">
       <div class="col-sm-2">
@@ -77,45 +59,23 @@ while ($row = sqlsrv_fetch_array($vendors, SQLSRV_FETCH_ASSOC)) {
 
     </div> -->
 
-    <br/>
+
 
     <!-- Dashboard -->
-    <div id="dashboard_div">
+        <div id="dashboard_div" class="collapse in" >
+        
+          <div id="dashChart_div"></div>
+  
+          <div id="filter_div"></div>
+  
+        <!-- </div> -->
       
-
-      <!-- <div class="col-sm-8" style="float:right"> -->
-        <div id="line_div" style="width: 100%; height: 75%"></div>
-      <!-- </div> -->
-
-      <div class="col-sm-1"></div>
-
-      <div class="col-sm-4" style="float:left" >
-      <div id="filter_div" style="width: 100%; height: 75%;"></div>
-      </div>
-
-      <div class="col-sm-2"></div>
-
-      <!-- <div class="col-sm-4">
-        <button
-          class="btn btn-style btn-sm btn-block responsive-width"
-          id="UpdateLine"
-          name="UpdateLine"
-          style="float: right;"
-        >
-          Update Line
-        </button>
-      </div> -->
-
-    </div>
-
-    <br/>
-    <br/>
 
     <!-- second row of buttons (selection, submit and reset buttons) -->
     <div class="row">
       <form method="post" id="framework_form">
         <div class="form-group">
-          <div class="col-sm-4" >
+          <div class="col-sm-3" >
             <select 
               class="form-control"
               name="framework[]"
@@ -123,6 +83,21 @@ while ($row = sqlsrv_fetch_array($vendors, SQLSRV_FETCH_ASSOC)) {
               multiple
             >
               <?php
+                $serverName = "oitss5\mssql05,1433"; //serverName\instanceName
+                $connectionInfo = array( "Database"=>"RFID_Inventory", "UID"=>"RFID_Inventoryuser", "PWD"=>"pO49nY1xdM");
+                $conn = sqlsrv_connect( $serverName, $connectionInfo);
+
+                // get vendors
+                $getVendorsquery = "
+                  SELECT DISTINCT(Vendor_Name)
+                  FROM wal_main_apr6tojul02_filtered
+                  ";
+                $vendors = sqlsrv_query($conn, $getVendorsquery);
+                $dataVendors = array();
+                while ($row = sqlsrv_fetch_array($vendors, SQLSRV_FETCH_ASSOC)) {
+                  array_push($dataVendors, $row['Vendor_Name']);
+                }
+
                 foreach($dataVendors as $row)
                 {
                   echo '<option value="'.$row.'">'.$row.'</option>';
@@ -131,7 +106,7 @@ while ($row = sqlsrv_fetch_array($vendors, SQLSRV_FETCH_ASSOC)) {
             </select>
           </div>
 
-          <div class="col-sm-4" >
+          <div class="col-sm-3" >
             <input
               class="btn btn-style btn-sm btn-block responsive-width"
               name="datePicker"
@@ -145,7 +120,7 @@ while ($row = sqlsrv_fetch_array($vendors, SQLSRV_FETCH_ASSOC)) {
               type="submit" 
               class="btn btn-style btn-sm btn-block responsive-width" 
               name="submit" 
-              value="View Charts"
+              value="Update"
               style="background-color: #8a8a8a" />
           </div>
 
@@ -160,125 +135,151 @@ while ($row = sqlsrv_fetch_array($vendors, SQLSRV_FETCH_ASSOC)) {
             </button>
           </div>
 
+          <div class="col-sm-2">
+            <button class="viz-btn" data-toggle="collapse" data-target="#chart_div" aria-expanded="false" aria-controls="chart_div">Bubble Viz</button>
+          </div>
+          
         </div>
       </form>
     </div>
 
-    <br/>
+  </div>
+
     <br/>
 
   </div>
 
+  <!-- <br/>
+  <br/> -->
+
   <!-- Chart canvas -->
-  <div class="chartClass" id="chart" >
+  <div id="chart_div" class="collapse">
+   
+
+    
+
+    <div class="chartClass" id="chart" >
   
-    <div class="row ">
-
-      <div class="col-sm-1" style="margin-top: 1rem;">
-        <label class="switch" style="float:left;">
-          <input type="checkbox" onchange="toggleFunction()">
-          <span class="slider round"></span>
-        </label>
-      </div>
-      
-      <div class="col-sm-1" style="margin-top: 1rem;" >
-        <button
-          class="btn btn-style btn-sm btn-block responsive-width btn-width"
-          id="seperate"
-          name="separate"
-          
-        >
-          Separate
-        </button>
-      </div>
-    
-      <div class="col-sm-1" style="margin-top: 1rem;" >
-        <button
-          
-          class="btn btn-style btn-sm btn-block responsive-width btn-width"
-          id="frozen"
-          name="frozen"
-          
-        >
-          Frozen
-        </button>
-      </div>
-
-      <div class="col-sm-1" style="margin-top: 1rem;" >
-        <button
-          
-          class="btn btn-style btn-sm btn-block responsive-width btn-width"
-          id="Out-of-Stock"
-          name="Out-of-Stock"
-          
-        >
-          Out-of-Stock
-        </button>
-      </div>
-    
-      <div class="col-sm-1" style="margin-top: 1rem;" >
-        <button
-          
-          class="btn btn-style btn-sm btn-block responsive-width btn-width"
-          id="orderSmape"
-          name="orderSmape"
-          
-        >
-          Order Error
-        </button>
-      </div>
-    
-      <div class="col-sm-1" style="margin-top: 1rem;" >
-        <button
-          
-          class="btn btn-style btn-sm btn-block responsive-width btn-width"
-          id="smapeHeatmap"
-          name="smapeHeatmap"
-          
-        >
-          Error Heatmap
-        </button>
-      </div>
-
-      <div class="col-sm-1" style="margin-top: 1rem;" >
-        <button
-          
-          class="btn btn-style btn-sm btn-block responsive-width btn-width"
-          id="collapse"
-          name="collapse"
-          
-        >
-          Collapse
-        </button>
-      </div>
-
-      <div class="col-sm-5" style="margin-top: 1rem;" >
-        <div style="float: right;">
-          <button
-
-          class="btn btn-style btn-sm btn-block responsive-width btn-width"
-          id="Data"
-          name="Data"
-        >
-          Data
-        </button>
+      <div class="row ">
+  
+        <div class="col-sm-1" style="margin-top: 1rem;">
+          <label class="switch" style="float:left;">
+            <input type="checkbox" onchange="toggleFunction()">
+            <span class="slider round"></span>
+          </label>
         </div>
         
-      </div>
+        <div class="col-sm-1" style="margin-top: 1rem;" >
+          <button
+            class="btn btn-style btn-sm btn-block responsive-width btn-width"
+            id="seperate"
+            name="separate"
+            
+          >
+            Separate
+          </button>
+        </div>
+      
+        <div class="col-sm-1" style="margin-top: 1rem;" >
+          <button
+            
+            class="btn btn-style btn-sm btn-block responsive-width btn-width"
+            id="frozen"
+            name="frozen"
+            
+          >
+            Frozen
+          </button>
+        </div>
+  
+        <div class="col-sm-1" style="margin-top: 1rem;" >
+          <button
+            
+            class="btn btn-style btn-sm btn-block responsive-width btn-width"
+            id="Out-of-Stock"
+            name="Out-of-Stock"
+            
+          >
+            Out-of-Stock
+          </button>
+        </div>
+      
+        <div class="col-sm-1" style="margin-top: 1rem;" >
+          <button
+            
+            class="btn btn-style btn-sm btn-block responsive-width btn-width"
+            id="orderSmape"
+            name="orderSmape"
+            
+          >
+            Order Error
+          </button>
+        </div>
+      
+        <div class="col-sm-1" style="margin-top: 1rem;" >
+          <button
+            
+            class="btn btn-style btn-sm btn-block responsive-width btn-width"
+            id="smapeHeatmap"
+            name="smapeHeatmap"
+            
+          >
+            Error Heatmap
+          </button>
+        </div>
+  
+        <div class="col-sm-1" style="margin-top: 1rem;" >
+          <button
+            
+            class="btn btn-style btn-sm btn-block responsive-width btn-width"
+            id="collapse"
+            name="collapse"
+            
+          >
+            Collapse
+          </button>
+        </div>
 
-      <div class="uploadFileButton">
-        <input 
-          class="uploadFile btn " 
-          id = "file" 
-          type="hidden"
-        />
-        
+        <div class="col-sm-1" style="margin-top: 1.3rem;">
+          <button 
+            class="viz-btn" 
+            data-toggle="collapse" 
+            data-target="#dashboard_div" 
+            aria-expanded="false" 
+            aria-controls="dashboard_div"
+          >
+              Dashboard
+            </button>
+        </div>
+  
+        <div class="col-sm-4" style="margin-top: 1rem;" >
+          <div style="float: right;">
+            <button
+  
+            class="btn btn-style btn-sm btn-block responsive-width btn-width"
+            id="Data"
+            name="Data"
+          >
+            Data
+          </button>
+          </div>
+          
+        </div>
+  
+        <div class="uploadFileButton">
+          <input 
+            class="uploadFile btn " 
+            id = "file" 
+            type="hidden"
+          />
+          
+        </div>
+      
       </div>
-    
+  
+      <svg></svg>
+  
     </div>
-
-    <svg></svg>
-
   </div>
 
 
@@ -297,6 +298,15 @@ while ($row = sqlsrv_fetch_array($vendors, SQLSRV_FETCH_ASSOC)) {
     .btn-width {
       width: 10rem !important;
     }
+    
+    .viz-btn {
+      font-family: Helvetica;
+      text-align: center;
+      background-color: #d4d1d1;
+      border-color: white;
+      color: #727272;
+      border-radius: 1rem !important;
+    }
 
     .btn-style {
       font-family: Helvetica;
@@ -305,7 +315,6 @@ while ($row = sqlsrv_fetch_array($vendors, SQLSRV_FETCH_ASSOC)) {
       border-color: white;
       color: white;
       border-radius: 2rem !important;
-      
     }
 
     .responvie-width {
@@ -323,6 +332,11 @@ while ($row = sqlsrv_fetch_array($vendors, SQLSRV_FETCH_ASSOC)) {
     .chartClass {
       background-color: #111111;
       height: 100vmax;
+      /* position:absolute;
+      top:0px;
+      right:0px;
+      bottom:0px;
+      left:0px; */
     }
 
     .toggleBackground {
@@ -397,6 +411,7 @@ while ($row = sqlsrv_fetch_array($vendors, SQLSRV_FETCH_ASSOC)) {
       background-color: #8a8a8a !important;
     }
 
+    
     .ui-datepicker {
       width: 25% !important;
     }
@@ -468,6 +483,7 @@ while ($row = sqlsrv_fetch_array($vendors, SQLSRV_FETCH_ASSOC)) {
     var test;
     $("#datepicker").datepicker({ dateFormat: "yy-mm-dd" });
     
+    
     $('#framework').multiselect({
       nonSelectedText: 'Select Vendors',
       enableFiltering: true,
@@ -480,11 +496,13 @@ while ($row = sqlsrv_fetch_array($vendors, SQLSRV_FETCH_ASSOC)) {
     .multiselect('updateButtonText');
 
     $('#framework_form').on('submit', function(event){
+      google.charts.load('current', {'packages':['corechart', 'controls']});
       d3.select("#chart").selectAll("svg > *").remove();
       event.preventDefault();
       form_data = $(this).serialize();
       selectedDate = $("#datepicker").val();
       test = 'test data';
+      
 
       $.ajax({
         url:"/sqlservergetdata.php",
@@ -512,82 +530,13 @@ while ($row = sqlsrv_fetch_array($vendors, SQLSRV_FETCH_ASSOC)) {
         url:"/sqlDashboardData.php",
         method:"POST",
         data: form_data,
+        dataType: "json",
         success:function(data){
-          data = JSON.parse(data);
 
-          var data = new google.visualization.DataTable(data);
-
-          var dashboard = new google.visualization.Dashboard(document.getElementById('dashboard_div'));
-
-          var dateRangeSlider = new google.visualization.ControlWrapper({
-              'controlType': 'DateRangeFilter',
-              'containerId': 'filter_div',
-              'options': {
-              title:'',
-              filterColumnIndex: 0,
-              ui: {
-                  chartOptions: {
-                  chartArea: {width:'100%', height: 'auto'},
-                  
-                  }
-              },
-              hAxis: {
-                  baselineColor: 'none'
-              },
-              vAxis: {
-                  textStyle: {
-                  fontSize: 10,
-                  bold: false
-                  },
-                  titleTextStyle:{
-                  italic: false
-                  }
-              }   
-              }
-          });
-
-          var chart = new 
-          google.visualization.ChartWrapper({
-              'chartType': 'ColumnChart',    // stacked bar chart
-              // 'chartType': 'LineChart',   // Line Chart 
-              'containerId': 'line_div',
-              'options': {
-              title:'',
-              legend:{position:'top'},
-              isStacked: true,             // stacked bar chart
-              hAxis: {
-                  title: '',
-                  textStyle: {
-                  fontSize: 10,
-                  bold: false
-                  },
-                  titleTextStyle:{
-                  italic: false
-                  }
-              },
-              vAxis: {
-                  title: '',
-                  textStyle: {
-                  fontSize: 10,
-                  bold: false
-                  },
-                  titleTextStyle:{
-                  italic: false
-                  }
-              },
-              colors: ['#00FF7F', '#FF3B28', '#00A7FA'],
-              fontSize: 10,
-              textStyle: "Helvetica"
-              }
-          });
-
-          dashboard.bind(dateRangeSlider, chart);
-          dashboard.draw(data);
-
+          google.charts.setOnLoadCallback(drawDashboard(data));
+          
         }
       });
-
-      // return false;
     });
   });
 </script>

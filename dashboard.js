@@ -1,18 +1,7 @@
-google.charts.load('current', {'packages':['corechart', 'controls']});
-google.charts.setOnLoadCallback(drawDashboard);
 
-function drawDashboard(){
-
-var jsonData = $.ajax({
-    url: "sqlDashboardData.php",
-    dataType: "json",
-    async: false
-    }).responseText;
+function drawDashboard(jsonData){
     
 var data = new google.visualization.DataTable(jsonData);
-
-
-// var data = new google.visualization.DataTable(<?php echo $jsonTable; ?>);
 
 var dashboard = new google.visualization.Dashboard(document.getElementById('dashboard_div'));
 
@@ -25,7 +14,7 @@ var dateRangeSlider = new google.visualization.ControlWrapper({
     ui: {
         chartOptions: {
         chartArea: {
-            width:'100%', 
+            width:'100vmax', 
             height: 'auto',
         },
         
@@ -50,7 +39,7 @@ var chart = new
 google.visualization.ChartWrapper({
     'chartType': 'ColumnChart',    // stacked bar chart
     // 'chartType': 'LineChart',   // Line Chart 
-    'containerId': 'line_div',
+    'containerId': 'dashChart_div',
     'options': {
     title:'',
     legend:{position:'top'},
@@ -86,4 +75,4 @@ dashboard.draw(data);
 
 }
 
-google.charts.setOnLoadCallback(drawDashboard);
+// google.charts.setOnLoadCallback(drawDashboard);
