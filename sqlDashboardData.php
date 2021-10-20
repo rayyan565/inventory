@@ -31,78 +31,78 @@
             // line chart 
             $linesQuery = "
             SELECT Date as date, 
-            (
-                (SUM(
-                    CASE WHEN(Cycle_Count_Restored - Hist_On_Hand_Qty)=0
-                        THEN 1.000
-                        ELSE 0.000 END
-                    )
-                ) 
-                / 
-                COUNT(SKU)
-            ) AS exactmatch, 
-            (
-                (SUM(
-                    CASE WHEN(Cycle_Count_Restored - Hist_On_Hand_Qty)<0
-                        THEN 1.000
-                        ELSE 0.000 END
-                    )
-                ) 
-                / 
-                COUNT(SKU)
-            ) AS overStated,
-            (
-                (SUM(
-                    CASE WHEN(Cycle_Count_Restored - Hist_On_Hand_Qty)>0
-                        THEN 1.000
-                        ELSE 0.000 END
-                    )
-                ) 
-                / 
-                COUNT(SKU)
-            ) AS underStated
-            FROM wal_main_apr6tojul02_filtered 
-            GROUP BY Date
-            ORDER BY Date;
-        ";
+                (
+                    (SUM(
+                        CASE WHEN(Cycle_Count_Restored - Hist_On_Hand_Qty)=0
+                            THEN 1.000
+                            ELSE 0.000 END
+                        )
+                    ) 
+                    / 
+                    COUNT(SKU)
+                ) AS exactmatch, 
+                (
+                    (SUM(
+                        CASE WHEN(Cycle_Count_Restored - Hist_On_Hand_Qty)<0
+                            THEN 1.000
+                            ELSE 0.000 END
+                        )
+                    ) 
+                    / 
+                    COUNT(SKU)
+                ) AS overStated,
+                (
+                    (SUM(
+                        CASE WHEN(Cycle_Count_Restored - Hist_On_Hand_Qty)>0
+                            THEN 1.000
+                            ELSE 0.000 END
+                        )
+                    ) 
+                    / 
+                    COUNT(SKU)
+                ) AS underStated
+                FROM wal_main_apr6tojul02_filtered 
+                GROUP BY Date
+                ORDER BY Date;
+            ";
 
-        $lineVendorsQuery = "
-            SELECT Date as date, 
-            (
-                (SUM(
-                    CASE WHEN(Cycle_Count_Restored - Hist_On_Hand_Qty)=0
-                        THEN 1.000
-                        ELSE 0.000 END
-                    )
-                ) 
-                / 
-                COUNT(SKU)
-            ) AS exactmatch, 
-            (
-                (SUM(
-                    CASE WHEN(Cycle_Count_Restored - Hist_On_Hand_Qty)<0
-                        THEN 1.000
-                        ELSE 0.000 END
-                    )
-                ) 
-                / 
-                COUNT(SKU)
-            ) AS overStated,
-            (
-                (SUM(
-                    CASE WHEN(Cycle_Count_Restored - Hist_On_Hand_Qty)>0
-                        THEN 1.000
-                        ELSE 0.000 END
-                    )
-                ) 
-                / 
-                COUNT(SKU)
-            ) AS underStated
-            FROM wal_main_apr6tojul02_filtered 
-            WHERE Vendor_Name IN ($frameworkList)
-            GROUP BY Date
-            ORDER BY Date;
-        ";
+            $lineVendorsQuery = "
+                SELECT Date as date, 
+                (
+                    (SUM(
+                        CASE WHEN(Cycle_Count_Restored - Hist_On_Hand_Qty)=0
+                            THEN 1.000
+                            ELSE 0.000 END
+                        )
+                    ) 
+                    / 
+                    COUNT(SKU)
+                ) AS exactmatch, 
+                (
+                    (SUM(
+                        CASE WHEN(Cycle_Count_Restored - Hist_On_Hand_Qty)<0
+                            THEN 1.000
+                            ELSE 0.000 END
+                        )
+                    ) 
+                    / 
+                    COUNT(SKU)
+                ) AS overStated,
+                (
+                    (SUM(
+                        CASE WHEN(Cycle_Count_Restored - Hist_On_Hand_Qty)>0
+                            THEN 1.000
+                            ELSE 0.000 END
+                        )
+                    ) 
+                    / 
+                    COUNT(SKU)
+                ) AS underStated
+                FROM wal_main_apr6tojul02_filtered 
+                WHERE Vendor_Name IN ($frameworkList)
+                GROUP BY Date
+                ORDER BY Date;
+            ";
 
         $queryRes = sqlsrv_query($conn, $lineVendorsQuery);
 

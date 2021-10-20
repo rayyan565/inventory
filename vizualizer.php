@@ -18,17 +18,15 @@
   <!-- Header and buttons -->
   <div class="container">
    
-    <!-- header row -->
+    <!-- header row --> 
     <!-- <div class="row">
       <div class="col-sm-2">
         <button 
-          
           style="
             font-family: Helvetica;
             font-size: larger;
             float: left;
-            margin: 6rem 0rem 0rem 3rem;"
-        >
+            margin: 6rem 0rem 0rem 3rem;">
           Menu
         </button>
       </div>
@@ -82,8 +80,15 @@
               id="framework" 
               multiple
             >
+
+            <!-- <option id = "venOptions"></option>
+            <script>
+
+              $( "#venOptions" ).load( "vendorsData.php" );
+            </script> -->
+
               <?php
-                $serverName = "oitss5\mssql05,1433"; //serverName\instanceName
+                $serverName = "oitss5\mssql05,1433"; //serverName\instanceName 
                 $connectionInfo = array( "Database"=>"RFID_Inventory", "UID"=>"RFID_Inventoryuser", "PWD"=>"pO49nY1xdM");
                 $conn = sqlsrv_connect( $serverName, $connectionInfo);
 
@@ -103,6 +108,7 @@
                   echo '<option value="'.$row.'">'.$row.'</option>';
                 }
               ?>
+
             </select>
           </div>
 
@@ -154,9 +160,6 @@
 
   <!-- Chart canvas -->
   <div id="chart_div" class="collapse">
-   
-
-    
 
     <div class="chartClass" id="chart" >
   
@@ -483,7 +486,6 @@
     var test;
     $("#datepicker").datepicker({ dateFormat: "yy-mm-dd" });
     
-    
     $('#framework').multiselect({
       nonSelectedText: 'Select Vendors',
       enableFiltering: true,
@@ -549,6 +551,7 @@
 <script src="bubbleChart.js"></script>
 <script src="sqlDashboardData.php"></script>
 <script src="dashboard.js"></script>
+<script src="vendorsData.php"></script>
 <!-- <script src="fill.js"></script> -->
 
 </html>
