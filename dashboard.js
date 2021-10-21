@@ -9,29 +9,29 @@ var dateRangeSlider = new google.visualization.ControlWrapper({
     'controlType': 'DateRangeFilter',
     'containerId': 'filter_div',
     'options': {
-    title:'',
-    filterColumnIndex: 0,
-    ui: {
-        chartOptions: {
-        chartArea: {
-            width:'100vmax', 
-            height: 'auto',
+        title:'',
+        filterColumnIndex: 0,
+        ui: {
+            chartOptions: {
+            chartArea: {
+                width:'100vmax', 
+                height: 'auto',
+            },
+            
+            }
         },
-        
-        }
-    },
-    hAxis: {
-        baselineColor: 'none'
-    },
-    vAxis: {
-        textStyle: {
-        fontSize: 10,
-        bold: false
+        hAxis: {
+            baselineColor: 'none'
         },
-        titleTextStyle:{
-        italic: false
-        }
-    }   
+        vAxis: {
+            textStyle: {
+            fontSize: 10,
+            bold: false
+            },
+            titleTextStyle:{
+            italic: false
+            }
+        }   
     }
 });
 
@@ -41,32 +41,41 @@ google.visualization.ChartWrapper({
     // 'chartType': 'LineChart',   // Line Chart 
     'containerId': 'dashChart_div',
     'options': {
-    title:'',
-    legend:{position:'top'},
-    isStacked: true,             // stacked bar chart
-    hAxis: {
-        title: '',
-        textStyle: {
-        fontSize: 10,
-        bold: false
+        title:'',
+        legend:{position:'top'},
+        isStacked: true,             // stacked bar chart
+        ui: {
+            chartOptions: {
+            chartArea: {
+                width: '10rem', 
+                height: '10rem',
+            },
+            
+            }
         },
-        titleTextStyle:{
-        italic: false
-        }
-    },
-    vAxis: {
-        title: '',
-        textStyle: {
-        fontSize: 10,
-        bold: false
+        hAxis: {
+            title: '',
+            textStyle: {
+            fontSize: 10,
+            bold: false
+            },
+            titleTextStyle:{
+            italic: false
+            }
         },
-        titleTextStyle:{
-        italic: false
-        }
-    },
-    colors: ['#00FF7F', '#FF3B28', '#00A7FA'],
-    fontSize: 10,
-    textStyle: "Helvetica"
+        vAxis: {
+            title: '',
+            textStyle: {
+            fontSize: 10,
+            bold: false
+            },
+            titleTextStyle:{
+            italic: false
+            }
+        },
+        colors: ['#00FF7F', '#FF3B28', '#00A7FA'],
+        fontSize: 10,
+        textStyle: "Helvetica"
     }
 });
 

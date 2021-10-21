@@ -1,34 +1,31 @@
 const width = innerWidth;
 const height = innerHeight;
-let reset = 0; 
+let reset = 0;
 let click = "measures";
 var OH_array = [];
 var RFID_array = [];
-
 
 function bubbleChart() {
     var width = 600,
         height = 400,
         columnForColors = "category",
         columnForRadius = "views";
-
     function chart(selection) {
         var data = selection.datum();
         var div = selection,
             svg = div.selectAll('svg');
         svg.attr('width', width).attr('height', height);
-
         
         OH_array = [];
         RFID_array = [];
+
         //filling in the arrays 
         data.forEach(function(item){
-            
             OH_array.push(item.OH);
-            RFID_array.push(item.RFID); 
+            RFID_array.push(item.RFID);
+        })
+        avgSize(OH_array, RFID_array)
 
-         })
-         avgSize(OH_array, RFID_array)
         //building tooltip
         var tooltip = selection
             .append("div")
@@ -44,7 +41,6 @@ function bubbleChart() {
             .style("width", "150px")
             .text("");
 
-        
         //creating the circles 
         var node = svg.selectAll("circle")
             .data(data)
@@ -65,7 +61,6 @@ function bubbleChart() {
             .on("mouseout", function() {
                 return tooltip.style("visibility", "hidden");
             });
-
 
         //first circles gravity     
         var simulation = d3.forceSimulation(data)
@@ -91,84 +86,83 @@ function bubbleChart() {
                 click = "measures";
         }
         var margin = { top: 32, left: 15, right: 15, bottom: 50 }
+
        //text  
        document.getElementById('Data').onclick = function() {
             svg.selectAll('text')
             .attr("opacity","0")
+
             // working with text data
             if (click == "measures"){
+                // const textFill1 = svg.append("g");
+                // const textFill2 = svg.append("g");
+                // const textFill3 = svg.append("g");
 
-                const textFill1 = svg.append("g");
-                const textFill2 = svg.append("g");
-                const textFill3 = svg.append("g");
+                // textFill1.append("rect")
+                //     .attr('x', (innerWidth *  .05)-margin.right)
+                //     .attr('y',  (innerHeight *   .75)-margin.top)
+                //     .attr('rx', '10')
+                //     .attr('ry', '10')
+                //     .attr("width", "375")
+                //     .attr("height", "40")
+                //     .attr("id", "rect")
+                //     .style("fill", "gray")
+                //     .style("opacity", "0.75")
 
-                textFill1.append("rect")
-                    .attr('x', (innerWidth *  .05)-margin.right)
-                    .attr('y',  (innerHeight *   .75)-margin.top)
-                    .attr('rx', '10')
-                    .attr('ry', '10')
-                    .attr("width", "375")
-                    .attr("height", "40")
-                    .attr("id", "rect")
-                    .style("fill", "gray")
-                    .style("opacity", "0.75")
-
-                textFill1.append('text')
+                svg.append('text')
                     .attr('x', innerWidth *  .05)
                     .attr('y',  innerHeight *   .75)
                     .style("text-anchor", "center")
-                    .attr('stroke', 'white')
-                    .attr('fill', 'white')
+                    .attr('stroke', '#949494')
+                    .attr('fill', '#949494')
                     .text('Exact Match = ' + calculateExactMatch(OH_array, RFID_array) + '%')
                     .attr("opacity","1")
                     .style("font-size", "34px")
                     .style('font-style', 'serif')
 
-                textFill2.append("rect")
-                    .attr('x', (innerWidth *  .05)-margin.right)
-                    .attr('y',  (innerHeight *   .80)-margin.top)
-                    .attr('rx', '10')
-                    .attr('ry', '10')
-                    .attr("width", "375")
-                    .attr("height", "40")
-                    .attr("id", "rect")
-                    .style("fill", "gray")
-                    .style("opacity", "0.75")
+                // textFill2.append("rect")
+                //     .attr('x', (innerWidth *  .05)-margin.right)
+                //     .attr('y',  (innerHeight *   .80)-margin.top)
+                //     .attr('rx', '10')
+                //     .attr('ry', '10')
+                //     .attr("width", "375")
+                //     .attr("height", "40")
+                //     .attr("id", "rect")
+                //     .style("fill", "gray")
+                //     .style("opacity", "0.75")
 
-                textFill2.append('text')
+                svg.append('text')
                     .attr('x', innerWidth *  .05)
                     .attr('y',  innerHeight *   .80)
                     .style("text-anchor", "center")
-                    .attr('stroke', 'white')
-                    .attr('fill', 'white')
+                    .attr('stroke', '#949494')
+                    .attr('fill', '#949494')
                     .text('Total Magnitude = '+ calculateTotalMag(OH_array, RFID_array) + '%')
                     .attr("opacity","1")
                     .style("font-size", "34px")
                     .style('font-style', 'serif')
 
-                textFill3.append("rect")
-                    .attr('x', (innerWidth *  .05)-margin.right)
-                    .attr('y',  (innerHeight *   .85)-margin.top)
-                    .attr('rx', '10')
-                    .attr('ry', '10')
-                    .attr("width", "375")
-                    .attr("height", "40")
-                    .attr("id", "rect")
-                    .style("fill", "gray")
-                    .style("opacity", "0.75")
+                // textFill3.append("rect")
+                //     .attr('x', (innerWidth *  .05)-margin.right)
+                //     .attr('y',  (innerHeight *   .85)-margin.top)
+                //     .attr('rx', '10')
+                //     .attr('ry', '10')
+                //     .attr("width", "375")
+                //     .attr("height", "40")
+                //     .attr("id", "rect")
+                //     .style("fill", "gray")
+                //     .style("opacity", "0.75")
 
-
-                textFill3.append('text')
+                svg.append('text')
                     .attr('x', innerWidth *  .05)
                     .attr('y',  innerHeight *  .85)
                     .style("text-anchor", "center")
-                    .attr('stroke', 'white')
-                    .attr('fill', 'white')
+                    .attr('stroke', '#949494')
+                    .attr('fill', '#949494')
                     .text('SKUs Total= ' + RFID_array.length)
                     .attr("opacity","1")
                     .style("font-size", "34px")
                     click = "H_measures";
-            
             }
             else if (click == "H_measures"){
                 svg.selectAll('text')
@@ -177,7 +171,6 @@ function bubbleChart() {
             }
             
        }
-       
 
          //When the user selects to split up the circles based on inventory 
         document.getElementById('seperate').onclick = function() {
@@ -188,33 +181,12 @@ function bubbleChart() {
             document.getElementById('Data').onclick = function() {
                 // working with text data
                 if (click == "seperate"){
-                    // const textFill1 = svg.append("g");
-                    // const textFill1 = svg.append("g");
-                    // const textFill1 = svg.append("g");
-                    // const textFill1 = svg.append("g");
-                    // const textFill1 = svg.append("g");
-                    // const textFill1 = svg.append("g");
-
-                    // $("svg").css({top: 200, left: 200, position:'absolute'});
-
-                    // textFill1.append("rect")
-                    // .attr('x', (innerWidth *  .11)-margin.right, (innerWidth *  .11)-margin.left)
-                    // .attr('y',  (innerHeight *   .1)-margin.top)
-                    // .attr('rx', '10')
-                    // .attr('ry', '10')
-                    // .attr("width", "1110")
-                    // .attr("height", "40")
-                    // .attr("id", "rect")
-                    // .style("fill", "gray")
-                    // .style("opacity", "0.5")
-                    // .css({top: 20, left: 20, right: 20, position:'absolute'})
-
                     svg.append('text')
                         .attr('x', innerWidth *  .11)
                         .attr('y',  innerHeight *   .1)
                         .style("text-anchor", "center")
-                        .attr('stroke', 'black')
-                        .attr('fill', 'black')
+                        .attr('stroke', '#949494')
+                        .attr('fill', '#949494')
                         .text(calculateOver(OH_array, RFID_array) + ' Overstated SKUs ' )
                         .attr("opacity","1")
                         .style("font-size", "34px")
@@ -230,16 +202,18 @@ function bubbleChart() {
                         .attr("opacity","1")
                         .style("font-size", "34px")
                         click = "H_seperate";
+
                     svg.append('text')
                         .attr('x', innerWidth *  .43)
                         .attr('y',  innerHeight *   .1)
                         .style("text-anchor", "center")
-                        .attr('stroke', 'black')
-                        .attr('fill', 'black')
+                        .attr('stroke', '#949494')
+                        .attr('fill', '#949494')
                         .text(calculateEqual(OH_array, RFID_array) + ' Equal SKUs' )
                         .attr("opacity","1")
                         .style("font-size", "34px")
                         click = "H_seperate";
+
                     svg.append('text')
                         .attr('x', innerWidth *  .49)
                         .attr('y',  innerHeight *   .9)
@@ -250,16 +224,18 @@ function bubbleChart() {
                         .attr("opacity","1")
                         .style("font-size", "34px")
                         click = "H_seperate";
+
                     svg.append('text')
                         .attr('x', innerWidth *  .68)
                         .attr('y',  innerHeight *   .1)
                         .style("text-anchor", "center")
-                        .attr('stroke', 'black')
-                        .attr('fill', 'black')
+                        .attr('stroke', '#949494')
+                        .attr('fill', '#949494')
                         .text(calculateUnder(OH_array, RFID_array) + ' Understated SKUs' )
                         .attr("opacity","1")
                         .style("font-size", "34px")
                         click = "H_seperate";
+
                     svg.append('text')
                         .attr('x', innerWidth *  .785)
                         .attr('y',  innerHeight *   .9)
@@ -375,7 +351,6 @@ function bubbleChart() {
         }
         
         //to display the out of stock skus
-        
         document.getElementById('Out-of-Stock').onclick = function() {
             //workinig with text data
             svg.selectAll('text')
@@ -559,6 +534,7 @@ function bubbleChart() {
                         .attr("cy", function(d){ return d.y; })
                 });
         }
+
         //to bring it all back together 
         document.getElementById('collapse').onclick = function() {
             svg.selectAll('text')
@@ -641,11 +617,12 @@ function bubbleChart() {
         width = value;
         return chart;
     }
+
     chart.height = function(value) {
         if (!arguments.length) { console.log(height); return height; }
         height = value;
         return chart;
     }
+
     return chart;
 }
-

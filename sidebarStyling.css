@@ -12,7 +12,7 @@ body {
   left: 0;
   background-color: #e6e6e6ed;
   overflow-x: hidden;
-  transition: 0.5s;
+  transition: 0.3s;
   padding-top: 60px;
 }
 
@@ -40,7 +40,7 @@ body {
   font-size: 20px;
   cursor: pointer;
   background-color: #e6e6e6ed;
-  color: rgb(0, 0, 0);
+  color: #000000;
   padding: 10px 15px;
   border: none;
 }
@@ -51,11 +51,10 @@ body {
 
 
 .sticky {
-    position: fixed;
-
-    width: 100vmax !important;
+  position: fixed;
+  width: 100vmax !important;
 }
 
 .sticky + .content {
-    padding-top: 100%;
+  padding-top: 100%;
 }
