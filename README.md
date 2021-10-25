@@ -1,2 +1,2 @@
 # inventoryVisualizerAuburnRFIDLab
-Inventory Visualizer tool - Auburn RFID Lab
+Inventory Visualizer website using OIT Database
