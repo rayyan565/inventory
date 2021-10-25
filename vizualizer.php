@@ -38,14 +38,14 @@
 
   <div id="mySidepanel" class="sidepanel">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-      <a href="http://localhost:8080/#home">Home</a>
-      <a href="http://localhost:8080/#how">How It Works</a>
-      <a href="http://localhost:8080/#exact">Exact Match</a>
-      <a href="http://localhost:8080/#over">Overstated</a>
-      <a href="http://localhost:8080/#frozen">Frozen</a>
-      <a href="http://localhost:8080/#under">Understated</a>
-      <a href="http://localhost:8080/#upload">Upload</a>
-      <a href="http://localhost:8080/vizualizer.php">Vizualizer</a>
+      <a href="/#home">Home</a>
+      <a href="/#how">How It Works</a>
+      <a href="/#exact">Exact Match</a>
+      <a href="/#over">Overstated</a>
+      <a href="/#frozen">Frozen</a>
+      <a href="/#under">Understated</a>
+      <a href="/#upload">Upload</a>
+      <a href="/vizualizer.php">Vizualizer</a>
   </div>
   
   <!-- Buttons -->
