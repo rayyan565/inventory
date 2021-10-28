@@ -83,7 +83,7 @@
                   // get vendors
                   $getVendorsquery = "
                     SELECT DISTINCT(Vendor_Name)
-                    FROM wal_main_apr6tojul02_filtered
+                    FROM month_test_data35
                     ";
                   $vendors = sqlsrv_query($conn, $getVendorsquery);
                   $dataVendors = array();
@@ -379,6 +379,6 @@
 <script src="bubbleChart.js"></script>
 <script src="sqlDashboardData.php"></script>
 <script src="dashboard.js"></script>
-<script src="vendorsData.php"></script>
+<!-- <script src="vendorsData.php"></script> -->
 
 </html>

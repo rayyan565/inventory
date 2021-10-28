@@ -6,7 +6,7 @@
     // get vendors
     $getVendorsquery = "
         SELECT DISTINCT(Vendor_Name)
-        FROM wal_main_apr6tojul02_filtered
+        FROM month_test_data35
         ";
     $vendors = sqlsrv_query($conn, $getVendorsquery);
     $dataVendors = array();
@@ -17,6 +17,7 @@
     foreach($dataVendors as $row)
     {
         $vendorName .= $row . ',';
+        
         // echo $row;
         // echo '<option value="'.$row.'">'.$row.'</option>';
     }

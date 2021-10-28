@@ -17,8 +17,8 @@ $conn = sqlsrv_connect( $serverName, $connectionInfo);
         $frameworkList = "'" . str_replace(",","','", $framework) . "'";
 
         $query = "
-        SELECT SKU As SKU, Cycle_Count_Restored As RFID, Hist_On_Hand_Qty As OH 
-        FROM wal_main_apr6tojul02_filtered 
+        SELECT SKU, RFID, OH 
+        FROM month_test_data35 
         WHERE Vendor_Name IN ($frameworkList) 
         AND Date LIKE '$selectedDate'
         ";
@@ -26,16 +26,16 @@ $conn = sqlsrv_connect( $serverName, $connectionInfo);
 
 
         // $query = "
-        // SELECT SKU As SKU, Cycle_Count_Restored As RFID, Hist_On_Hand_Qty As OH 
-        // FROM wal_main_apr6tojul02_filtered 
+        // SELECT SKU As SKU, RFID, OH 
+        // FROM month_test_data35 
         // WHERE Vendor_Name IN ($frameworkList) 
-        // AND Hist_On_Hand_Qty - Cycle_Count_Restored < 0
+        // AND OH - RFID < 0
         // AND Date LIKE '$selectedDate'
         // ";
 
         // $query = "
-        // SELECT Date as date, ((SUM(CASE WHEN(Cycle_Count_Restored - Hist_On_Hand_Qty)=0 THEN 1 ELSE 0 END)) / COUNT(SKU))
-        // AS exactmatch FROM wal_main_apr6tojul02_filtered GROUP BY Date;
+        // SELECT Date as date, ((SUM(CASE WHEN(RFID - OH)=0 THEN 1 ELSE 0 END)) / COUNT(SKU))
+        // AS exactmatch FROM month_test_data35 GROUP BY Date;
         // ";
 
         $vendorsQuery = sqlsrv_query($conn, $query);

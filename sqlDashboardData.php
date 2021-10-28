@@ -6,7 +6,7 @@
     // get vendors
     $getVendorsquery = "
       SELECT DISTINCT(Vendor_Name)
-      FROM wal_main_apr6tojul02_filtered
+      FROM month_test_data35
       ";
     $vendors = sqlsrv_query($conn, $getVendorsquery);
     $dataVendors = array();
@@ -33,7 +33,7 @@
             SELECT Date as date, 
                 (
                     (SUM(
-                        CASE WHEN(Cycle_Count_Restored - Hist_On_Hand_Qty)=0
+                        CASE WHEN(RFID - OH)=0
                             THEN 1.000
                             ELSE 0.000 END
                         )
@@ -43,7 +43,7 @@
                 ) AS exactmatch, 
                 (
                     (SUM(
-                        CASE WHEN(Cycle_Count_Restored - Hist_On_Hand_Qty)<0
+                        CASE WHEN(RFID - OH)<0
                             THEN 1.000
                             ELSE 0.000 END
                         )
@@ -53,7 +53,7 @@
                 ) AS overStated,
                 (
                     (SUM(
-                        CASE WHEN(Cycle_Count_Restored - Hist_On_Hand_Qty)>0
+                        CASE WHEN(RFID - OH)>0
                             THEN 1.000
                             ELSE 0.000 END
                         )
@@ -61,7 +61,7 @@
                     / 
                     COUNT(SKU)
                 ) AS underStated
-                FROM wal_main_apr6tojul02_filtered 
+                FROM month_test_data35 
                 GROUP BY Date
                 ORDER BY Date;
             ";
@@ -70,7 +70,7 @@
                 SELECT Date as date, 
                 (
                     (SUM(
-                        CASE WHEN(Cycle_Count_Restored - Hist_On_Hand_Qty)=0
+                        CASE WHEN(RFID - OH)=0
                             THEN 1.000
                             ELSE 0.000 END
                         )
@@ -80,7 +80,7 @@
                 ) AS exactmatch, 
                 (
                     (SUM(
-                        CASE WHEN(Cycle_Count_Restored - Hist_On_Hand_Qty)<0
+                        CASE WHEN(RFID - OH)<0
                             THEN 1.000
                             ELSE 0.000 END
                         )
@@ -90,7 +90,7 @@
                 ) AS overStated,
                 (
                     (SUM(
-                        CASE WHEN(Cycle_Count_Restored - Hist_On_Hand_Qty)>0
+                        CASE WHEN(RFID - OH)>0
                             THEN 1.000
                             ELSE 0.000 END
                         )
@@ -98,7 +98,7 @@
                     / 
                     COUNT(SKU)
                 ) AS underStated
-                FROM wal_main_apr6tojul02_filtered 
+                FROM month_test_data35 
                 WHERE Vendor_Name IN ($frameworkList)
                 GROUP BY Date
                 ORDER BY Date;
