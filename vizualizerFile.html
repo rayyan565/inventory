@@ -1,18 +1,15 @@
-<!DOCTYPE html>
-<html lang="en"> 
+<html> 
 
 <head> 
-<title>AU RFID Bubble Viz</title>
-
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-  <link rel="stylesheet" href="sidebarStyling.css">
-  <link rel="stylesheet" href="style.css">
+    <title>AU RFID Bubble Viz</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <!-- <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
+    <link rel="stylesheet" href="sidebarStyling.css">
+    <link rel="stylesheet" href="style.css">
 
 </head>
 
 <body>
-
   <!-- Header -->
   <div class="row" id="myHeader" style="background-color: #ffffffe1; width: 100vmax !important; margin:0rem">
       <div class="col" style="float: left; margin-left: 0;">
@@ -32,21 +29,21 @@
                   float: right;
                   image-resolution: from-image;
                   width: 5rem;
-                  height: auto "/>
+                  height: auto"/>
               </a>
       </div>  
   </div>  
 
   <div id="mySidepanel" class="sidepanel">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-      <a href="/#home">Home</a>
-      <a href="/#how">How It Works</a>
-      <a href="/#exact">Exact Match</a>
-      <a href="/#over">Overstated</a>
-      <a href="/#frozen">Frozen</a>
-      <a href="/#under">Understated</a>
-      <a href="/#upload">Upload</a>
-      <a href="/vizualizer.php">DB Server</a>
+      <a href="index.html">Home</a>
+      <a href="index.html#how">How It Works</a>
+      <a href="index.html#exact">Exact Match</a>
+      <a href="index.html#over">Overstated</a>
+      <a href="index.html#frozen">Frozen</a>
+      <a href="index.html#under">Understated</a>
+      <a href="index.html#upload">Upload</a>
+      <a href="vizualizer.php">DB Server</a>
       <a href="/vizualizerFile.html">File Upload</a>
   </div>
   
@@ -55,15 +52,15 @@
     <!-- Dashboard -->
     <div id="dashboard_div" class="collapse in" >
     
-      <div id="dashChart_div"></div>
+      <!-- <div id="dashChart_div"></div> -->
 
-      <div id="filter_div"></div>
+      <!-- <div id="filter_div"></div> -->
 
     <!-- second row of buttons (selection, submit and reset buttons) -->
       <div class="row">
-        <form method="post" id="framework_form">
+        <!-- <form method="post" id="framework_form"> -->
           <div class="form-group">
-            <div class="col-sm-3" >
+            <!-- <div class="col-sm-2" >
               <select 
                 class="form-control"
                 name="framework[]"
@@ -71,72 +68,97 @@
                 multiple
               >
 
-              <!-- <option id = "venOptions"></option>
+               <option id = "venOptions"></option>
               <script>
 
                 $( "#venOptions" ).load( "vendorsData.php" );
               </script> -->
 
-                <?php
-                  $serverName = "oitss5\mssql05,1433"; //serverName\instanceName 
-                  $connectionInfo = array( "Database"=>"RFID_Inventory", "UID"=>"RFID_Inventoryuser", "PWD"=>"pO49nY1xdM");
-                  $conn = sqlsrv_connect( $serverName, $connectionInfo);
+                <!-- <?php
+                  // $serverName = "oitss5\mssql05,1433"; //serverName\instanceName 
+                  // $connectionInfo = array( "Database"=>"RFID_Inventory", "UID"=>"RFID_Inventoryuser", "PWD"=>"pO49nY1xdM");
+                  // $conn = sqlsrv_connect( $serverName, $connectionInfo);
 
-                  // get vendors
-                  $getVendorsquery = "
-                    SELECT DISTINCT(Vendor_Name)
-                    FROM month_test_data35
-                    ";
-                  $vendors = sqlsrv_query($conn, $getVendorsquery);
-                  $dataVendors = array();
-                  while ($row = sqlsrv_fetch_array($vendors, SQLSRV_FETCH_ASSOC)) {
-                    array_push($dataVendors, $row['Vendor_Name']);
-                  }
+                  // // get vendors
+                  // $getVendorsquery = "
+                  //   SELECT DISTINCT(Vendor_Name)
+                  //   FROM wal_main_apr6tojul02_filtered
+                  //   ";
+                  // $vendors = sqlsrv_query($conn, $getVendorsquery);
+                  // $dataVendors = array();
+                  // while ($row = sqlsrv_fetch_array($vendors, SQLSRV_FETCH_ASSOC)) {
+                  //   array_push($dataVendors, $row['Vendor_Name']);
+                  // }
 
-                  foreach($dataVendors as $row)
-                  {
-                    echo '<option value="'.$row.'">'.$row.'</option>';
-                  }
-                ?>
+                  // foreach($dataVendors as $row)
+                  // {
+                  //   echo '<option value="'.$row.'">'.$row.'</option>';
+                  // }
+                ?> -->
 
-              </select>
-            </div>
+              <!-- </select>
+            </div>  -->
 
-            <div class="col-sm-3" >
+            <!-- <div class="col-sm-2" >
               <input
                 class="btn btn-style btn-sm btn-block responsive-width"
                 name="datePicker"
                 id="datepicker"
                 placeholder="Select Date"
                 value="Select Date">
-            </div>
+            </div> -->
 
-            <div class="col-sm-2">
+            <!-- <div class="col-sm-2">
               <input 
                 type="submit" 
                 class="btn btn-style btn-sm btn-block responsive-width" 
                 name="submit" 
                 value="Update"
                 style="background-color: #8a8a8a" />
-            </div>
+            </div> -->
 
-            <div class="col-sm-2" >
+            <div class="col-sm-4" >
+              <input
+                class="uploadFile btn btn-style btn-sm btn-block responsive-width"
+                id="file"
+                type="file" 
+                onchange="loadFile()"
+                style="background-color: #8a8a8a"
+              />
+
+              <!-- <input 
+                class="uploadFile btn btn-primary" 
+                id = "file" 
+                type="file" 
+                onchange="loadFile()"
+              /> -->
+
+            </div>
+            <div class="col-sm-1"></div>
+            <div class="col-sm-4">
               <button
                 class="btn btn-style btn-sm btn-block responsive-width"
                 id="resetButton"
                 name="resetButton"
                 style="background-color: #8a8a8a"
               >
-                Reset
+                Reset All
               </button>
             </div>
-
+            <div class="col-sm-1"></div>
             <div class="col-sm-2">
-              <button class="viz-btn" data-toggle="collapse" data-target="#chart_div" aria-expanded="false" aria-controls="chart_div">Bubble Viz</button>
+              <button 
+                class="viz-btn" 
+                data-toggle="collapse" 
+                data-target="#chart_div" 
+                aria-expanded="false" 
+                aria-controls="chart_div">
+                  Bubble Viz
+              </button>
             </div>
             
           </div>
-        </form>
+        <!-- </form> -->
       </div>
       <br/>
     </div>
@@ -144,7 +166,7 @@
   </div>
 
   <!-- Chart canvas -->
-  <div id="chart_div" class="collapse">
+  <div id="chart_div"  class="collapse in">
 
     <div class="chartClass" id="chart" >
   
@@ -302,67 +324,67 @@
   }
 
   // selection of vendor and date
-  $(document).ready(function(){
-    var finalData;
-    var selectedDate;
-    var test;
-    $("#datepicker").datepicker({ dateFormat: "yy-mm-dd" });
+  // $(document).ready(function(){
+  //   var finalData;
+  //   var selectedDate;
+  //   var test;
+  //   $("#datepicker").datepicker({ dateFormat: "yy-mm-dd" });
     
-    $('#framework').multiselect({
-      nonSelectedText: 'Select Vendors',
-      enableFiltering: true,
-      enableCaseInsensitiveFiltering: true,
-      includeSelectAllOption: true,
-      buttonWidth: '100%',
-      buttonClass: 'btn btn-style btn-sm btn-block responsive-width'
-    })
-    .multiselect('selectAll', true)
-    .multiselect('updateButtonText');
+  //   $('#framework').multiselect({
+  //     nonSelectedText: 'Select Vendors',
+  //     enableFiltering: true,
+  //     enableCaseInsensitiveFiltering: true,
+  //     includeSelectAllOption: true,
+  //     buttonWidth: '100%',
+  //     buttonClass: 'btn btn-style btn-sm btn-block responsive-width'
+  //   })
+  //   .multiselect('selectAll', true)
+  //   .multiselect('updateButtonText');
 
-    $('#framework_form').on('submit', function(event){
-      google.charts.load('current', {'packages':['corechart', 'controls']});
-      d3.select("#chart").selectAll("svg > *").remove();
-      event.preventDefault();
-      form_data = $(this).serialize();
-      selectedDate = $("#datepicker").val();
-      test = 'test data';
+  //   $('#framework_form').on('submit', function(event){
+  //     google.charts.load('current', {'packages':['corechart', 'controls']});
+  //     d3.select("#chart").selectAll("svg > *").remove();
+  //     event.preventDefault();
+  //     form_data = $(this).serialize();
+  //     selectedDate = $("#datepicker").val();
+  //     test = 'test data';
       
 
-      $.ajax({
-        url:"/sqlservergetdata.php",
-        method:"POST",
-        data: form_data,
-        success:function(data){
+  //     $.ajax({
+  //       url:"/sqlservergetdata.php",
+  //       method:"POST",
+  //       data: form_data,
+  //       success:function(data){
 
-          if (data.startsWith("Select Date")){
-            alert(data);
-          }
-          else if(data.startsWith("Please select")){
-            alert(data);
-          }
-          else{
-            data = JSON.parse(data);
+  //         if (data.startsWith("Select Date")){
+  //           alert(data);
+  //         }
+  //         else if(data.startsWith("Please select")){
+  //           alert(data);
+  //         }
+  //         else{
+  //           data = JSON.parse(data);
 
-            var chart = bubbleChart().width(window.innerWidth).height(window.innerHeight);
-            d3.select('body').select('#chart').datum(data).call(chart);
-          }
+  //           var chart = bubbleChart().width(window.innerWidth).height(window.innerHeight);
+  //           d3.select('body').select('#chart').datum(data).call(chart);
+  //         }
 
-        }
-      });
+  //       }
+  //     });
 
-      $.ajax({
-        url:"/sqlDashboardData.php",
-        method:"POST",
-        data: form_data,
-        dataType: "json",
-        success:function(data){
+  //     $.ajax({
+  //       url:"/sqlDashboardData.php",
+  //       method:"POST",
+  //       data: form_data,
+  //       dataType: "json",
+  //       success:function(data){
 
-          google.charts.setOnLoadCallback(drawDashboard(data));
+  //         google.charts.setOnLoadCallback(drawDashboard(data));
           
-        }
-      });
-    });
-  });
+  //       }
+  //     });
+  //   });
+  // });
 
 </script>
 
@@ -372,15 +394,13 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" />
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.6.0/d3.min.js"></script>
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
 <script src="calculations.js"></script>
 <script src="bubbleChart.js"></script>
-<script src="sqlDashboardData.php"></script>
-<script src="dashboard.js"></script>
-<!-- <script src="vendorsData.php"></script> -->
+<script src="fill.js"></script>
 
 </html>

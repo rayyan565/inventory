@@ -43,6 +43,7 @@ google.visualization.ChartWrapper({
     'options': {
         title:'',
         legend:{position:'top'},
+        height:390,
         isStacked: true,             // stacked bar chart
         ui: {
             chartOptions: {

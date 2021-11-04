@@ -107,7 +107,7 @@ function calculateRadius(OH, RFID){
       radius = Math.sqrt(RFID / Math.PI); // Exact Match 
     }
     
-    return Math.max(radius, Math.sqrt(1 / Math.PI)) * 7 * scale(OH_array,RFID_array);
+    return Math.max(radius, Math.sqrt(1 / Math.PI)) * 5 * scale(OH_array,RFID_array);
 }
 
 //calculation for the outer radius of the circle using the larger value 
@@ -134,7 +134,7 @@ function calculateStroke(OH, RFID){
   else {
     stroke = Math.abs((Math.sqrt(OH / Math.PI)) - (Math.sqrt(RFID / Math.PI)))
   }
-  return Math.max(stroke, 0) * 7 * scale(OH_array,RFID_array);
+  return Math.max(stroke, 0) * 5 * scale(OH_array,RFID_array);
 }
 
 function calculateRadiusWithStroke(OH, RFID){
