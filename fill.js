@@ -13,6 +13,7 @@ function populateChart(error, data) {
  
          d.OH = parseInt(d.OH,10)
          d.RFID = parseInt(d.RFID,10)
+         d.Price = parseFloat(d.Price,10)
  
          console.log(d);
          return d; 

@@ -6,7 +6,7 @@
     // get vendors
     $getVendorsquery = "
       SELECT DISTINCT(Vendor_Name)
-      FROM month_test_data35
+      FROM wal_main_apr6tojul02_filtered_prices
       ";
     $vendors = sqlsrv_query($conn, $getVendorsquery);
     $dataVendors = array();
@@ -61,7 +61,7 @@
                     / 
                     COUNT(SKU)
                 ) AS underStated
-                FROM month_test_data35 
+                FROM wal_main_apr6tojul02_filtered_prices 
                 GROUP BY Date
                 ORDER BY Date;
             ";
@@ -98,7 +98,7 @@
                     / 
                     COUNT(SKU)
                 ) AS underStated
-                FROM month_test_data35 
+                FROM wal_main_apr6tojul02_filtered_prices 
                 WHERE Vendor_Name IN ($frameworkList)
                 GROUP BY Date
                 ORDER BY Date;

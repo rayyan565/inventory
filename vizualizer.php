@@ -85,7 +85,7 @@
                   // get vendors
                   $getVendorsquery = "
                     SELECT DISTINCT(Vendor_Name)
-                    FROM month_test_data35
+                    FROM wal_main_apr6tojul02_filtered_prices
                     ";
                   $vendors = sqlsrv_query($conn, $getVendorsquery);
                   $dataVendors = array();
@@ -215,7 +215,33 @@
             Error Heatmap
           </button>
         </div>
-  
+        
+        <div class="col-sm-1" style="margin-top: 1rem;" >
+            <button
+              
+              class="btn btn-style btn-sm btn-block responsive-width btn-width"
+              id="InStore"
+              name="InStore"
+              
+            >
+
+              Instore View
+            </button>
+         </div>
+
+         <div class="col-sm-1" style="margin-top: 1rem;" >
+          <button
+            
+            class="btn btn-style btn-sm btn-block responsive-width btn-width"
+            id="Online"
+            name="Online"
+            
+            >
+
+            Online View
+          </button>
+         </div>
+
         <div class="col-sm-1" style="margin-top: 1rem;" >
           <button
             
@@ -240,7 +266,7 @@
             </button>
         </div>
   
-        <div class="col-sm-4" style="margin-top: 1rem;" >
+        <div class="col-sm-2" style="margin-top: 1rem;" >
           <div style="float: right;">
             <button
   
@@ -294,7 +320,7 @@
 
   function myFunction() {
     if (window.pageYOffset > sticky) {
-      header.classList.add("sticky");
+      header.classList.remove("sticky");
     } 
     else {
       header.classList.remove("sticky");

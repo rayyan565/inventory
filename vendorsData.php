@@ -6,7 +6,7 @@
     // get vendors
     $getVendorsquery = "
         SELECT DISTINCT(Vendor_Name)
-        FROM month_test_data35
+        FROM wal_main_apr6tojul02_filtered_prices
         ";
     $vendors = sqlsrv_query($conn, $getVendorsquery);
     $dataVendors = array();

@@ -479,4 +479,81 @@ function stockedPercent(OH_array,RFID_array){
    
 }
 
+function overDiscrepancyCost(OH_array,RFID_array,Value_array){ 
+  let totalCost = 0  
+  for (let i = 0; i < RFID_array.length; i++){
+    if(OH_array[i] > RFID_array[i] && Value_array != 0)
+      totalCost += Math.abs(RFID_array[i] - OH_array[i])  * Value_array[i];
+  }
+  console.log(totalCost.toFixed(2));
+  return totalCost.toFixed(2);
+}
+
+function underDiscrepancyCost(OH_array,RFID_array,Value_array){   
+  let totalCost = 0 
+  for (let i = 0; i < RFID_array.length; i++){
+    if(OH_array[i] < RFID_array[i] && Value_array != 0)
+      totalCost += Math.abs(RFID_array[i] - OH_array[i])  * Value_array[i];
+  }
+  console.log(totalCost.toFixed(2));
+  return totalCost.toFixed(2);
+}
+
+
+function getInStoreColor(OH,RFID){
+  if ((OH > 0 && RFID == 0) || (OH == RFID && RFID == 0)){
+    console.log("check");
+    color = "white"
+  }
+  else color = getCircleColor(OH, RFID);
+  return color; 
+}
+
+function getOnlineColor(OH,RFID){
+  if ((OH > 0 && RFID < 1) || (RFID > 0 && OH < 1 )|| (OH == RFID && RFID == 0)){
+    color = "white"
+  }
+  else color = getCircleColor(OH, RFID);
+  return color; 
+}
+
+function getInStoreStroke(OH,RFID){
+  if (OH > 0 && RFID == 0){
+    color = "white"
+  }
+  else color = getColorStroke(OH, RFID);
+  return color; 
+}
+
+
+function getOnlineStroke(OH,RFID){
+  if ((OH > 0 && RFID < 1) || RFID > 0 && OH < 1 ){
+    color = "white"
+  }
+  else color = getColorStroke(OH, RFID);
+  return color; 
+}
+
+
+function getInStoreOpacity(OH,RFID){
+  if ((OH > 0 && RFID == 0) || (OH == RFID && RFID == 0)){
+    strength = .1;
+  }
+   
+  else strength = 1
+
+  return strength;
+}
+
+
+function getOnlineOpacity(OH,RFID){
+  if ((OH > 0 && RFID < 1) || (RFID > 0 && OH < 1 ) || (OH == RFID && RFID == 0)){
+    strength = .1;
+  }
+   
+  else strength = 1
+
+  return strength;
+}
+
 

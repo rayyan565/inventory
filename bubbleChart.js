@@ -18,11 +18,13 @@ function bubbleChart() {
         
         OH_array = [];
         RFID_array = [];
+        Value_array = [];
 
         //filling in the arrays 
         data.forEach(function(item){
             OH_array.push(item.OH);
             RFID_array.push(item.RFID);
+            Value_array.push(item.Price);
         })
         avgSize(OH_array, RFID_array)
 
@@ -52,7 +54,7 @@ function bubbleChart() {
             .style("stroke-width",(d) => calculateStroke(d.OH, d.RFID))
             .attr('transform', 'translate(' + [width / 2, height / 2] + ')')
             .on("mouseover", function(d) {
-                tooltip.html("RFID: " + d.RFID + "<br>" + "OH: "+ d.OH + "<br>" + "SKU: "+ d.SKU);
+                tooltip.html("RFID: " + d.RFID + "<br>" + "OH: "+ d.OH + "<br>" + "SKU: "+ d.SKU + "<br>" + "Cost Discrepancy: $"+ (d.Price * Math.abs(d.OH - d.RFID)).toFixed(2));
                 return tooltip.style("visibility", "visible");
             })
             .on("mousemove", function() {
@@ -94,6 +96,29 @@ function bubbleChart() {
 
             // working with text data
             if (click == "measures"){
+
+                svg.append('text')
+                        .attr('x', innerWidth *  .75)
+                        .attr('y',  innerHeight *   .02)
+                        .style("text-anchor", "center")
+                        .attr('stroke', '#D82E3F')
+                        .attr('fill', '#D82E3F')
+                        .text('Overstated Cost = $'+ overDiscrepancyCost(OH_array, RFID_array, Value_array))
+                        .attr("opacity","1")
+                        .style("font-size", "18px")
+                        .style('font-style', 'serif')
+
+                svg.append('text')
+                    .attr('x', innerWidth *  .75)
+                    .attr('y',  innerHeight *   .05)
+                    .style("text-anchor", "center")
+                    .attr('stroke', '#00A7FA')
+                    .attr('fill', '#00A7FA')
+                    .text('Understated Cost = $'+ underDiscrepancyCost(OH_array, RFID_array, Value_array))
+                    .attr("opacity","1")
+                    .style("font-size", "18px")
+                    .style('font-style', 'serif')
+
                 // const textFill1 = svg.append("g");
                 // const textFill2 = svg.append("g");
                 // const textFill3 = svg.append("g");
@@ -192,6 +217,8 @@ function bubbleChart() {
                         .style("font-size", "34px")
                         click = "H_seperate";
 
+                    
+
                     svg.append('text')
                         .attr('x', innerWidth *  .19)
                         .attr('y',  innerHeight *   .9)
@@ -246,6 +273,28 @@ function bubbleChart() {
                         .attr("opacity","1")
                         .style("font-size", "34px")
                         click = "H_seperate";
+
+                    svg.append('text')
+                        .attr('x', innerWidth *  .75)
+                        .attr('y',  innerHeight *   .02)
+                        .style("text-anchor", "center")
+                        .attr('stroke', '#D82E3F')
+                        .attr('fill', '#D82E3F')
+                        .text('Overstated Cost = $'+ overDiscrepancyCost(OH_array, RFID_array, Value_array))
+                        .attr("opacity","1")
+                        .style("font-size", "18px")
+                        .style('font-style', 'serif')
+
+                    svg.append('text')
+                        .attr('x', innerWidth *  .75)
+                        .attr('y',  innerHeight *   .05)
+                        .style("text-anchor", "center")
+                        .attr('stroke', '#00A7FA')
+                        .attr('fill', '#00A7FA')
+                        .text('Understated Cost = $'+ underDiscrepancyCost(OH_array, RFID_array, Value_array))
+                        .attr("opacity","1")
+                        .style("font-size", "18px")
+                        .style('font-style', 'serif')
                 
                 }
                 else if (click == "H_seperate"){
@@ -292,6 +341,28 @@ function bubbleChart() {
                             .text('Frozen SKU Total = ' + calculateFrozen(OH_array, RFID_array))
                             .attr("opacity","1")
                             .style("font-size", "34px")
+
+                        svg.append('text')
+                            .attr('x', innerWidth *  .75)
+                            .attr('y',  innerHeight *   .02)
+                            .style("text-anchor", "center")
+                            .attr('stroke', '#D82E3F')
+                            .attr('fill', '#D82E3F')
+                            .text('Overstated Cost = $'+ overDiscrepancyCost(OH_array, RFID_array, Value_array))
+                            .attr("opacity","1")
+                            .style("font-size", "18px")
+                            .style('font-style', 'serif')
+    
+                        svg.append('text')
+                            .attr('x', innerWidth *  .75)
+                            .attr('y',  innerHeight *   .05)
+                            .style("text-anchor", "center")
+                            .attr('stroke', '#00A7FA')
+                            .attr('fill', '#00A7FA')
+                            .text('Understated Cost = $'+ underDiscrepancyCost(OH_array, RFID_array, Value_array))
+                            .attr("opacity","1")
+                            .style("font-size", "18px")
+                            .style('font-style', 'serif')
 
                         svg.append('text')
                             .attr('x', innerWidth *  .19)
@@ -368,6 +439,28 @@ function bubbleChart() {
                             .html('Out-Of-Stock SKU Total = ' + "<br>" + calculateOutofStock(OH_array,RFID_array))
                             .attr("opacity","1")
                             .style("font-size", "34px")
+
+                        svg.append('text')
+                            .attr('x', innerWidth *  .75)
+                            .attr('y',  innerHeight *   .02)
+                            .style("text-anchor", "center")
+                            .attr('stroke', '#D82E3F')
+                            .attr('fill', '#D82E3F')
+                            .text('Overstated Cost = $'+ overDiscrepancyCost(OH_array, RFID_array, Value_array))
+                            .attr("opacity","1")
+                            .style("font-size", "18px")
+                            .style('font-style', 'serif')
+    
+                        svg.append('text')
+                            .attr('x', innerWidth *  .75)
+                            .attr('y',  innerHeight *   .05)
+                            .style("text-anchor", "center")
+                            .attr('stroke', '#00A7FA')
+                            .attr('fill', '#00A7FA')
+                            .text('Understated Cost = $'+ underDiscrepancyCost(OH_array, RFID_array, Value_array))
+                            .attr("opacity","1")
+                            .style("font-size", "18px")
+                            .style('font-style', 'serif')
 
                         svg.append('text')
                             .attr('x', innerWidth *  .2)
@@ -499,6 +592,28 @@ function bubbleChart() {
                             .style("font-size", "34px")
 
                         svg.append('text')
+                            .attr('x', innerWidth *  .75)
+                            .attr('y',  innerHeight *   .02)
+                            .style("text-anchor", "center")
+                            .attr('stroke', '#D82E3F')
+                            .attr('fill', '#D82E3F')
+                            .text('Overstated Cost = $'+ overDiscrepancyCost(OH_array, RFID_array, Value_array))
+                            .attr("opacity","1")
+                            .style("font-size", "18px")
+                            .style('font-style', 'serif')
+    
+                        svg.append('text')
+                            .attr('x', innerWidth *  .75)
+                            .attr('y',  innerHeight *   .05)
+                            .style("text-anchor", "center")
+                            .attr('stroke', '#00A7FA')
+                            .attr('fill', '#00A7FA')
+                            .text('Understated Cost = $'+ underDiscrepancyCost(OH_array, RFID_array, Value_array))
+                            .attr("opacity","1")
+                            .style("font-size", "18px")
+                            .style('font-style', 'serif')
+
+                        svg.append('text')
                             .attr('x', innerWidth *  .815)
                             .attr('y',  innerHeight *   .85)
                             .style("text-anchor", "center")
@@ -567,6 +682,28 @@ function bubbleChart() {
                         .attr("opacity","1")
                         .style("font-size", "34px")
                         click = "H_measures";
+
+                    svg.append('text')
+                        .attr('x', innerWidth *  .75)
+                        .attr('y',  innerHeight *   .02)
+                        .style("text-anchor", "center")
+                        .attr('stroke', '#D82E3F')
+                        .attr('fill', '#D82E3F')
+                        .text('Overstated Cost = $'+ overDiscrepancyCost(OH_array, RFID_array, Value_array))
+                        .attr("opacity","1")
+                        .style("font-size", "18px")
+                        .style('font-style', 'serif')
+
+                    svg.append('text')
+                        .attr('x', innerWidth *  .75)
+                        .attr('y',  innerHeight *   .05)
+                        .style("text-anchor", "center")
+                        .attr('stroke', '#00A7FA')
+                        .attr('fill', '#00A7FA')
+                        .text('Understated Cost = $'+ underDiscrepancyCost(OH_array, RFID_array, Value_array))
+                        .attr("opacity","1")
+                        .style("font-size", "18px")
+                        .style('font-style', 'serif')
     
                     svg.append('text')
                         .attr('x', innerWidth *  .8)
@@ -603,6 +740,47 @@ function bubbleChart() {
                         .attr("cy", function(d){ return d.y; })
                 });
                
+        }
+                
+        let storeColor = 0
+        document.getElementById('InStore').onclick = function() {
+            
+
+            if (storeColor == 0){
+                svg.selectAll("circle")
+                    .style("fill",(d)=> getInStoreColor(d.OH, d.RFID))
+                    .attr("stroke", (d)=> getInStoreStroke(d.OH, d.RFID))
+                    .attr("opacity", (d)=> getInStoreOpacity(d.OH, d.RFID))
+                    console.log("check");
+                storeColor = 1
+            }
+            else{
+                svg.selectAll("circle")
+                .style("fill", (d)=> getCircleColor(d.OH, d.RFID))
+                .attr("stroke", (d) => getColorStroke(d.OH,d.RFID))
+                .attr("opacity", "1")
+                storeColor = 0
+            }
+        }
+
+        let onlineColor = 0;
+        document.getElementById('Online').onclick = function() {
+
+            if (onlineColor == 0){
+                
+                svg.selectAll("circle")
+                    .style("fill",(d)=> getOnlineColor(d.OH, d.RFID))
+                    .attr("stroke", (d)=> getOnlineStroke(d.OH, d.RFID))
+                    .attr("opacity", (d)=> getOnlineOpacity(d.OH, d.RFID))
+                    onlineColor = 1
+            }
+            else{
+                svg.selectAll("circle")
+                .style("fill", (d)=> getCircleColor(d.OH, d.RFID))
+                .attr("stroke", (d) => getColorStroke(d.OH,d.RFID))
+                .attr("opacity", "1")
+                onlineColor = 0
+            }
         }
 
         document.getElementById('resetButton').onclick = function() {
