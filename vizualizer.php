@@ -85,7 +85,7 @@
                   // get vendors
                   $getVendorsquery = "
                     SELECT DISTINCT(Vendor_Name)
-                    FROM wal_main_apr6tojul02_filtered_prices
+                    FROM month_test_data35_prices
                     ";
                   $vendors = sqlsrv_query($conn, $getVendorsquery);
                   $dataVendors = array();
@@ -368,11 +368,10 @@
           }
           else{
             data = JSON.parse(data);
-
+            // alert(data);
             var chart = bubbleChart().width(window.innerWidth).height(window.innerHeight);
             d3.select('body').select('#chart').datum(data).call(chart);
           }
-
         }
       });
 
@@ -382,11 +381,11 @@
         data: form_data,
         dataType: "json",
         success:function(data){
-
+          // alert(data);
           google.charts.setOnLoadCallback(drawDashboard(data));
-          
         }
       });
+
     });
   });
 
