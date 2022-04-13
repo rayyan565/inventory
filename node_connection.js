@@ -27,7 +27,7 @@ var Request = require('tedious').Request;
 var TYPES = require('tedious').TYPES;  
 
 function executeStatement() {  
-    request = new Request("SELECT COUNT(DISTINCT(SKU)) FROM month_test_data35_prices;", function(err) {  
+    request = new Request("SELECT COUNT(DISTINCT(SKU)) FROM wal_main_apr6tojul02_filtered_prices;", function(err) {  
     if (err) {  
         console.log(err);}  
     });  

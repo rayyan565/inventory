@@ -6,7 +6,7 @@
     // get vendors
     $getVendorsquery = "
       SELECT DISTINCT(Vendor_Name)
-      FROM month_test_data35_prices
+      FROM wal_main_apr6tojul02_filtered_prices
       ";
     $vendors = sqlsrv_query($conn, $getVendorsquery);
     $dataVendors = array();
@@ -30,7 +30,7 @@
             
             // line chart 
             $linesQuery = "
-            SELECT Dates as date, 
+            SELECT Date as date, 
                 (
                     (SUM(
                         CASE WHEN(RFID - OH)=0
@@ -61,13 +61,13 @@
                     / 
                     COUNT(SKU)
                 ) AS underStated
-                FROM month_test_data35_prices 
-                GROUP BY Dates
-                ORDER BY Dates;
+                FROM wal_main_apr6tojul02_filtered_prices 
+                GROUP BY Date
+                ORDER BY Date;
             ";
 
             $lineVendorsQuery = "
-                SELECT Dates as date, 
+                SELECT Date as date, 
                 (
                     (SUM(
                         CASE WHEN(RFID - OH)=0
@@ -98,10 +98,10 @@
                     / 
                     COUNT(SKU)
                 ) AS underStated
-                FROM month_test_data35_prices 
+                FROM wal_main_apr6tojul02_filtered_prices 
                 WHERE Vendor_Name IN ($frameworkList)
-                GROUP BY Dates
-                ORDER BY Dates;
+                GROUP BY Date
+                ORDER BY Date;
             ";
 
         $queryRes = sqlsrv_query($conn, $lineVendorsQuery);
