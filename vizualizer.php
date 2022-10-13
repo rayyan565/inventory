@@ -15,7 +15,7 @@
 
   <!-- Header -->
   <div class="row" id="myHeader" style="background-color: #ffffffe1; width: 100vmax !important; margin:0rem">
-      <div class="col" style="float: left; margin-left: 0;">
+      <!-- <div class="col" style="float: left; margin-left: 0;">
           <button class="openbtn" onclick="openNav()">☰</button>
       </div>
 
@@ -34,7 +34,7 @@
                   width: 5rem;
                   height: auto "/>
               </a>
-      </div>  
+      </div>   -->
   </div>  
 
   <div id="mySidepanel" class="sidepanel">
