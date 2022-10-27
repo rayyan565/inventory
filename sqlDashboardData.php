@@ -1,16 +1,19 @@
 <?php
-    $serverName = "oitss5\mssql05,1433"; //serverName\instanceName
-    $connectionInfo = array( "Database"=>"RFID_Inventory", "UID"=>"RFID_Inventoryuser", "PWD"=>"pO49nY1xdM");
-    $conn = sqlsrv_connect( $serverName, $connectionInfo);
-    
+    $host = "alecsiteserver.mysql.database.azure.com";
+    $dbname = "bubble_viz";
+    $username = "alecadmin";
+    $password = "RFIDlab123!";
+
+    $mysqli = new mysqli(hostname: $host, username: $username, password: $password, database: $dbname);
+
     // get vendors
     $getVendorsquery = "
       SELECT DISTINCT(Vendor_Name)
       FROM wal_main_apr6tojul02_filtered_prices
       ";
-    $vendors = sqlsrv_query($conn, $getVendorsquery);
+    $vendors = $mysqli->query($getVendorsquery);
     $dataVendors = array();
-    while ($row = sqlsrv_fetch_array($vendors, SQLSRV_FETCH_ASSOC)) {
+    while ($row = $vendors->fetch_array(MYSQLI_ASSOC)) {
       array_push($dataVendors, $row['Vendor_Name']);
     }
 
@@ -104,7 +107,7 @@
                 ORDER BY Date;
             ";
 
-        $queryRes = sqlsrv_query($conn, $lineVendorsQuery);
+        $queryRes = $mysqli->query($lineVendorsQuery);
 
         $rows = array();
         $table = array();
@@ -128,7 +131,7 @@
             )
         );
 
-        while($row = sqlsrv_fetch_array($queryRes, SQLSRV_FETCH_ASSOC)){
+        while($row = $queryRes->fetch_array(MYSQLI_ASSOC)){
         $row["date"] = ($row["date"]->modify("-1 months"))->format("Y,m,d,h,m,s");
 
         $datetime = explode(".", $row["date"]);

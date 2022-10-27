@@ -1,17 +1,17 @@
 var Connection = require('tedious').Connection;  
 var config = {  
-    server: 'oitss5\mssql05,1433',  //update me
+    server: 'alecsiteserver.mysql.database.azure.com',  //update me
     authentication: {
         type: 'default',
         options: {
-            userName: 'RFID_Inventoryuser', //update me
-            password: 'pO49nY1xdM'  //update me
+            userName: 'alecadmin', //update me
+            password: 'RFIDlab123!'  //update me
         }
     },
     options: {
         // If you are on Microsoft Azure, you need encryption:
         encrypt: true,
-        database: 'RFID_Inventory'  //update me
+        database: 'bubble_viz'  //update me
     }
 }; 
 var connection = new Connection(config);  

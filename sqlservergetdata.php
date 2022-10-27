@@ -1,7 +1,10 @@
 <?php
-$serverName = "oitss5\mssql05,1433"; //serverName\instanceName
-$connectionInfo = array( "Database"=>"RFID_Inventory", "UID"=>"RFID_Inventoryuser", "PWD"=>"pO49nY1xdM");
-$conn = sqlsrv_connect( $serverName, $connectionInfo);
+ $host = "alecsiteserver.mysql.database.azure.com";
+ $dbname = "bubble_viz";
+ $username = "alecadmin";
+ $password = "RFIDlab123!";
+
+ $mysqli = new mysqli(hostname: $host, username: $username, password: $password, database: $dbname);
 
   
     if(isset($_POST["framework"])){
@@ -38,7 +41,7 @@ $conn = sqlsrv_connect( $serverName, $connectionInfo);
         // AS exactmatch FROM wal_main_apr6tojul02_filtered_prices GROUP BY Date;
         // ";
 
-        $vendorsQuery = sqlsrv_query($conn, $query);
+        $vendorsQuery = $mysqli->query($query);
 
         if(str_starts_with($selectedDate, 'Select')){
             echo ('Select Date to View Bubble Viz');
@@ -46,7 +49,7 @@ $conn = sqlsrv_connect( $serverName, $connectionInfo);
         else{
             if($vendorsQuery){
                 $dataVen = array();
-                while ($row = sqlsrv_fetch_array($vendorsQuery, SQLSRV_FETCH_ASSOC)) {
+                while ($row = $vendorsQuery->fetch_array(MYSQLI_ASSOC)) {
                     $dataVen[] = $row;
                 }
                 echo json_encode($dataVen);
