@@ -1,9 +1,10 @@
-<html> 
+<!DOCTYPE html>
+<html>
 
 <head> 
     <title>AU RFID Bubble Viz</title>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <!-- <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
+<!--     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
     <link rel="stylesheet" href="sidebarStyling.css">
     <link rel="stylesheet" href="style.css">
 
@@ -13,7 +14,7 @@
   <!-- Header -->
   <div class="row" id="myHeader" style="background-color: #ffffffe1; width: 100vmax !important; margin:0rem">
       <div class="col" style="float: left; margin-left: 0;">
-          <button class="openbtn" onclick="openNav()">☰</button>
+          <button class="openbtn" onclick="openNav()">Menu</button>
       </div>
 
       <div class="col" >
@@ -35,7 +36,7 @@
   </div>  
 
   <div id="mySidepanel" class="sidepanel">
-      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">x</a>
       <a href="index.html">Home</a>
       <a href="index.html#how">How It Works</a>
       <a href="index.html#exact">Exact Match</a>
@@ -51,116 +52,7 @@
   <div class="container">
     <!-- Dashboard -->
     <div id="dashboard_div" class="collapse in" >
-    
-      <!-- <div id="dashChart_div"></div> -->
 
-      <!-- <div id="filter_div"></div> -->
-
-    <!-- second row of buttons (selection, submit and reset buttons) -->
-      <div class="row">
-        <!-- <form method="post" id="framework_form"> -->
-          <div class="form-group">
-            <!-- <div class="col-sm-2" >
-              <select 
-                class="form-control"
-                name="framework[]"
-                id="framework" 
-                multiple
-              >
-
-               <option id = "venOptions"></option>
-              <script>
-
-                $( "#venOptions" ).load( "vendorsData.php" );
-              </script> -->
-
-                <!-- <?php
-                  // $serverName = "alecsiteserver.mysql.database.azure.com"; //serverName\instanceName 
-                  // $connectionInfo = array( "Database"=>"bubble_viz", "UID"=>"alecadmin", "PWD"=>"RFIDlab123!");
-                  // $conn = sqlsrv_connect( $serverName, $connectionInfo);
-
-                  // // get vendors
-                  // $getVendorsquery = "
-                  //   SELECT DISTINCT(Vendor_Name)
-                  //   FROM wal_main_apr6tojul02_filtered
-                  //   ";
-                  // $vendors = sqlsrv_query($conn, $getVendorsquery);
-                  // $dataVendors = array();
-                  // while ($row = sqlsrv_fetch_array($vendors, _FETCH_ASSOC)) {
-                  //   array_push($dataVendors, $row['Vendor_Name']);
-                  // }
-
-                  // foreach($dataVendors as $row)
-                  // {
-                  //   echo '<option value="'.$row.'">'.$row.'</option>';
-                  // }
-                ?> -->
-
-              <!-- </select>
-            </div>  -->
-
-            <!-- <div class="col-sm-2" >
-              <input
-                class="btn btn-style btn-sm btn-block responsive-width"
-                name="datePicker"
-                id="datepicker"
-                placeholder="Select Date"
-                value="Select Date">
-            </div> -->
-
-            <!-- <div class="col-sm-2">
-              <input 
-                type="submit" 
-                class="btn btn-style btn-sm btn-block responsive-width" 
-                name="submit" 
-                value="Update"
-                style="background-color: #8a8a8a" />
-            </div> -->
-
-            <div class="col-sm-4" >
-              <input
-                class="uploadFile btn btn-style btn-sm btn-block responsive-width"
-                id="file"
-                type="file" 
-                onchange="loadFile()"
-                style="background-color: #8a8a8a"
-              />
-
-              <!-- <input 
-                class="uploadFile btn btn-primary" 
-                id = "file" 
-                type="file" 
-                onchange="loadFile()"
-              /> -->
-
-            </div>
-            <div class="col-sm-1"></div>
-            <div class="col-sm-4">
-              <button
-                class="btn btn-style btn-sm btn-block responsive-width"
-                id="resetButton"
-                name="resetButton"
-                style="background-color: #8a8a8a"
-              >
-                Reset All
-              </button>
-            </div>
-            <div class="col-sm-1"></div>
-            <div class="col-sm-2">
-              <button 
-                class="viz-btn" 
-                data-toggle="collapse" 
-                data-target="#chart_div" 
-                aria-expanded="false" 
-                aria-controls="chart_div">
-                  Bubble Viz
-              </button>
-            </div>
-            
-          </div>
-        <!-- </form> -->
-      </div>
-      <br/>
     </div>
 
   </div>
@@ -178,7 +70,17 @@
             <span class="slider round"></span>
           </label>
         </div>
-        
+
+        <div class="col-sm-2" style="margin-top: 1rem;">
+           <input
+              class="uploadFile btn btn-style btn-sm btn-block responsive-width"
+              id="file"
+              type="file"
+              onchange="loadFile()"
+              style="background-color: #8a8a8a"
+           />
+          </div>
+
         <div class="col-sm-1" style="margin-top: 1rem;" >
           <button
             class="btn btn-style btn-sm btn-block responsive-width btn-width"
@@ -250,19 +152,30 @@
           </button>
         </div>
 
-        <div class="col-sm-1" style="margin-top: 1.3rem;">
+        <div class="col-sm-1" style="margin-top: 1rem;">
           <button 
             class="viz-btn" 
-            data-toggle="collapse" 
+            data-toggle="collapse"
             data-target="#dashboard_div" 
             aria-expanded="false" 
             aria-controls="dashboard_div"
           >
               Dashboard
-            </button>
+          </button>
         </div>
-  
-        <div class="col-sm-4" style="margin-top: 1rem;" >
+
+        <div class="col-sm-1" style="margin-top: 1rem;">
+          <button
+            class="btn btn-style btn-sm btn-block responsive-width"
+            id="resetButton"
+            name="resetButton"
+            style="background-color: #8A5353"
+          >
+              Reset All
+          </button>
+          </div>
+
+        <div class="col-sm-1" style="margin-top: 1rem;" >
           <div style="float: right;">
             <button
   
@@ -317,11 +230,13 @@
   function myFunction() {
     if (window.pageYOffset > sticky) {
       header.classList.add("sticky");
-    } 
+    }
     else {
       header.classList.remove("sticky");
     }
   }
+
+
 
   // selection of vendor and date
   // $(document).ready(function(){

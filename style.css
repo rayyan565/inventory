@@ -24,6 +24,7 @@ body {
 .viz-btn {
   font-family: Helvetica;
   text-align: center;
+  /*position: absolute;*/
   background-color: #d4d1d1;
   border-color: white;
   color: #727272;
