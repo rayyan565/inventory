@@ -82,17 +82,8 @@
                 </script> -->
 
                   <?php
-                    // $serverName = "alecsiteserver.mysql.database.azure.com"; //serverName\instanceName 
-                    // $connectionInfo = array( "Database"=>"bubble_viz", "UID"=>"alecadmin", "PWD"=>"RFIDlab123!");
-                    // $conn = sqlsrv_connect($serverName, $connectionInfo);
 
-                    $host = "alecsiteserver.mysql.database.azure.com";
-                    $dbname = "bubble_viz";
-                    $username = "alecadmin";
-                    $password = "RFIDlab123!";
-
-                    $mysqli = new mysqli(hostname: $host, username: $username, password: $password, database: $dbname);
-
+                    $mysqli = require __DIR__ . "/db.php";
                     // if( $conn === false ) {
                     //   die(print_r( sqlsrv_errors(), true));
                     // }

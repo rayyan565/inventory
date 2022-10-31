@@ -1,11 +1,6 @@
 <?php
- $host = "alecsiteserver.mysql.database.azure.com";
- $dbname = "bubble_viz";
- $username = "alecadmin";
- $password = "RFIDlab123!";
 
- $mysqli = new mysqli(hostname: $host, username: $username, password: $password, database: $dbname);
-
+$mysqli = require __DIR__ . "/db.php";
   
     if(isset($_POST["framework"])){
         $framework = '';
