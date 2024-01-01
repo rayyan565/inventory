@@ -1,9 +1,9 @@
 {
   "dependencies": {
     "express": "^4.17.2",
-    "mssql": "^7.3.0",
+    "mssql": "^10.0.0",
     "mysql": "^2.18.1",
-    "tedious": "^14.0.0"
+    "tedious": "^16.6.1"
   },
   "name": "inventory_viz_serverdb",
   "description": "Inventory Visualizer website using OIT Database",
